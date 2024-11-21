@@ -1,4 +1,9 @@
 package app.controllers;
 
-public class StartController {
+import app.models.CommandHandler;
+
+public class StartController extends Controller{
+    public StartController(CommandHandler commandHandler){
+        super(commandHandler);
+    }
 }
