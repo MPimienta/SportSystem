@@ -1,11 +1,11 @@
 package app.controllers;
 
-import app.models.CommandHandler;
+import app.models.CLI;
 
 public abstract class Controller {
-    protected CommandHandler commandHandler;
+    protected CLI cli;
 
-    Controller(CommandHandler commandHandler) {
-        this.commandHandler = commandHandler;
+    Controller(CLI cli) {
+        this.cli = cli;
     }
 }

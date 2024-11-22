@@ -1,32 +1,25 @@
 package app;
 
-import app.controllers.ContinueController;
 import app.controllers.ReadController;
-import app.controllers.StartController;
-import app.models.CommandHandler;
+import app.models.CLI;
 import app.views.View;
 import app.views.console.ConsoleView;
 
 public class SportSystem {
-    private CommandHandler commandHandler;
+    private CLI cli;
     private View view;
-    private StartController startController;
     private ReadController readController;
-    private ContinueController continueController;
 
     private SportSystem(){
-        this.commandHandler = new CommandHandler();
-        this.startController = new StartController(this.commandHandler);
-        this.readController = new StartController(this.commandHandler);
-        this.continueController = new StartController(this.commandHandler);
-        this.view = new ConsoleView(this.startController, this.readController, this.continueController);
+        this.cli = new CLI();
+        this.readController = new ReadController(this.cli);
+        this.view = new ConsoleView(this.readController);
     }
 
     private void play() {
         do {
-            this.view.start();
             this.view.read();
-        } while (this.view.continueApp());
+        } while (true);
     }
 
     public static void main(String[] args) {
