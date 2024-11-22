@@ -22,6 +22,7 @@ public class SportSystem {
         } while (true);
     }
 
+
     public static void main(String[] args) {
         new SportSystem().play();
     }
