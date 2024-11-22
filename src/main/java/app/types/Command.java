@@ -1,7 +1,16 @@
 package app.types;
 
 import app.types.commands.CommandExecutor;
+import app.types.commands.NotACommand;
 import app.types.commands.admin.PlayerCreate;
+import app.types.commands.admin.PlayerDelete;
+import app.types.commands.admin.TeamCreate;
+import app.types.commands.admin.TeamDelete;
+import app.types.commands.admin.TeamAdd;
+import app.types.commands.admin.TeamRemove;
+import app.types.commands.admin.TournamentCreate;
+import app.types.commands.admin.TournamentDelete;
+import app.types.commands.admin.TournamentMatchmaking;
 
 import java.util.HashMap;
 import java.util.Map;
