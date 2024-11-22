@@ -24,13 +24,19 @@ public enum Command {
 
     private static final Map<String, Command> COMMANDS_MAP = new HashMap<>();
 
+    static {
+        for (Command cmd : Command.values()) {
+            COMMANDS_MAP.put(cmd.getCommandName(), cmd);
+        }
+    }
+
     Command(String commandName, CommandExecutor executor) {
         this.commandName = commandName;
         this.executor = executor;
     }
 
     public static Command getCommand(String name) {
-        Command command = COMMANDS_MAP.get(name.toLowerCase());
+        Command command = COMMANDS_MAP.get(name);
         if (command == null) {
             command = COMMANDS_MAP.get("not_a_command");
         }
@@ -41,13 +47,16 @@ public enum Command {
         return this.commandName;
     }
 
-    public Error getCommandError(Command command){
+    public Error getCommandError(){
         Error error;
-        if (command.getCommandName().equals(NOT_A_COMMAND.getCommandName())){
+
+        if(this.commandName.equals(NOT_A_COMMAND.getCommandName())){
             error = Error.INVALID_COMMAND;
         } else {
             error = Error.NULL;
         }
+
+        return error;
     }
 
     public void execute(){

@@ -1,6 +1,6 @@
 package app;
 
-import app.controllers.ReadController;
+import app.controllers.CommandController;
 import app.models.CLI;
 import app.views.View;
 import app.views.console.ConsoleView;
@@ -8,12 +8,12 @@ import app.views.console.ConsoleView;
 public class SportSystem {
     private CLI cli;
     private View view;
-    private ReadController readController;
+    private CommandController commandController;
 
     private SportSystem(){
         this.cli = new CLI();
-        this.readController = new ReadController(this.cli);
-        this.view = new ConsoleView(this.readController);
+        this.commandController = new CommandController(this.cli);
+        this.view = new ConsoleView(this.commandController);
     }
 
     private void play() {
