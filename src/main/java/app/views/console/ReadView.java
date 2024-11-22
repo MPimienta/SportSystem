@@ -12,7 +12,7 @@ public class ReadView {
     }
 
     void interact() {
-        new MessageView().writeln(Message.INPUT_COMMAND);
+        new MessageView().write(Message.INPUT_COMMAND);
         new CommandView(this.commandController).interact();
     }
 }
