@@ -3,6 +3,7 @@ package app.views.console;
 import app.controllers.CommandController;
 import app.types.Command;
 import app.types.Error;
+import app.views.Message;
 
 public class CommandView {
     private CommandController commandController;
@@ -19,6 +20,7 @@ public class CommandView {
         Command command;
         Error error;
         do{
+            new MessageView().write(Message.INPUT_COMMAND);
             command = this.getCommand();
             error = this.getCommandError(command);
         } while(!error.isNull());
