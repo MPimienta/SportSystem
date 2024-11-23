@@ -1,6 +1,7 @@
 package app.types;
 
-import app.types.commands.CommandExecutor;
+import app.controllers.ExecuteController;
+import app.types.commands.Command;
 import app.types.commands.NotACommand;
 import app.types.commands.admin.PlayerCreate;
 import app.types.commands.admin.PlayerDelete;
@@ -15,7 +16,7 @@ import app.types.commands.admin.TournamentMatchmaking;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum Command {
+public enum CommandManager {
     PLAYER_CREATE("player_create",new PlayerCreate()),
     TEAM_CREATE("team_create",new TeamCreate()),
     PLAYER_DELETE("player_delete",new PlayerDelete()),
@@ -28,28 +29,28 @@ public enum Command {
     NOT_A_COMMAND("not_a_command",new NotACommand())
     ;
 
-    private String commandName;
-    private CommandExecutor executor;
+    private final String commandName;
+    private final Command executor;
 
-    private static final Map<String, Command> COMMANDS_MAP = new HashMap<>();
+    private static final Map<String, CommandManager> COMMANDS_MAP = new HashMap<>();
 
     static {
-        for (Command cmd : Command.values()) {
+        for (CommandManager cmd : CommandManager.values()) {
             COMMANDS_MAP.put(cmd.getCommandName(), cmd);
         }
     }
 
-    Command(String commandName, CommandExecutor executor) {
+    CommandManager(String commandName, Command executor) {
         this.commandName = commandName;
         this.executor = executor;
     }
 
-    public static Command getCommand(String name) {
-        Command command = COMMANDS_MAP.get(name);
-        if (command == null) {
-            command = COMMANDS_MAP.get("not_a_command");
+    public static CommandManager getCommand(String input) {
+        CommandManager commandManager = COMMANDS_MAP.get(input);
+        if (commandManager == null) {
+            commandManager = COMMANDS_MAP.get("not_a_command");
         }
-        return command;
+        return commandManager;
     }
 
     public String getCommandName(){
@@ -68,7 +69,7 @@ public enum Command {
         return error;
     }
 
-    public void execute(){
-        this.executor.execute();
+    public Error execute(String arguments, ExecuteController executeController){
+        return this.executor.execute(arguments.split(";"), executeController);
     }
 }

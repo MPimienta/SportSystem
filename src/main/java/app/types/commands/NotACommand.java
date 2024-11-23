@@ -1,8 +1,11 @@
 package app.types.commands;
 
-public class NotACommand implements CommandExecutor{
-    @Override
-    public void execute() {
+import app.controllers.ExecuteController;
+import app.types.Error;
 
+public class NotACommand implements Command {
+
+    public Error execute(String[] arguments, ExecuteController executeController) {
+        return Error.NULL;
     }
 }
