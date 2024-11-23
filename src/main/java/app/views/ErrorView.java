@@ -7,6 +7,11 @@ public abstract class ErrorView {
             "\tThe command is not valid",
             "\tNot enough arguments",
             "\tPlayer already exists",
+            "\tYou do not possess admin privileges",
+            "\tYou are already logged out",
+            "\tThere is a user currently logged in",
+            "\tUser already exists",
+            "\tUser does not exist",
     };
 
     public abstract void writeln(Error error);

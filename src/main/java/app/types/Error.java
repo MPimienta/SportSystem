@@ -5,7 +5,11 @@ public enum Error {
     INVALID_COMMAND,
     NOT_ENOUGH_ARGUMENTS,
     PLAYER_ALREADY_EXISTS,
-    WRONG_COORDINATES,
+    NOT_ADMIN,
+    ALREADY_LOGGED_OUT,
+    USER_LOGGED_IN,
+    USER_ALREADY_EXISTS,
+    USER_DOES_NOT_EXIST,
     NULL;
 
     public boolean isNull() {

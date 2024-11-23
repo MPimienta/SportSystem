@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import app.models.lists.elements.Element;
 import app.types.Error;
+import app.types.users.Admin;
 
 public abstract class ListOfElements {
     private final LinkedList<Element> list;
@@ -12,9 +13,20 @@ public abstract class ListOfElements {
         this.list = new LinkedList<>();
     }
 
-    public abstract Error addElement(String[] arguments);
+    public Error addElement(Element element) {
+        Error error = Error.NULL;
+        int index = this.getIndexOfElement(element.getIdentifier());
 
-    protected int getIndexOfElement(String identifier){
+        if(!this.elementExists(index)){
+           this.list.add(element);
+        } else {
+            error = Error.PLAYER_ALREADY_EXISTS;
+        }
+
+        return error;
+    }
+
+    public int getIndexOfElement(String identifier){
         assert identifier != null;
 
         int i = 0;
@@ -25,12 +37,16 @@ public abstract class ListOfElements {
         return i;
     }
 
-    protected boolean elementExists(int index){
+    public boolean elementExists(int index){
         if(index == this.list.size()){
             return false;
         } else {
             return true;
         }
+    }
+
+    public Element getElement(int index){
+        return list.get(index);
     }
 
     protected LinkedList<Element> getList(){

@@ -12,6 +12,8 @@ import app.types.commands.admin.TeamRemove;
 import app.types.commands.admin.TournamentCreate;
 import app.types.commands.admin.TournamentDelete;
 import app.types.commands.admin.TournamentMatchmaking;
+import app.types.commands.common.Login;
+import app.types.commands.common.Logout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +28,8 @@ public enum CommandManager {
     TOURNAMENT_CREATE("tournament_create",new TournamentCreate()),
     TOURNAMENT_REMOVE("tournament_delete",new TournamentDelete()),
     TOURNAMENT_MATCHMAKING("tournament_matchmaking",new TournamentMatchmaking()),
+    LOGIN("login",new Login()),
+    LOGOUT("logout",new Logout()),
     NOT_A_COMMAND("not_a_command",new NotACommand())
     ;
 

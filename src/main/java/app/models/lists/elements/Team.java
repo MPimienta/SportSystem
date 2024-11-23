@@ -1,4 +1,9 @@
 package app.models.lists.elements;
 
-public class Team {
+import app.types.users.Admin;
+
+public class Team extends Player{
+    public Team(String name, Admin creator) {
+        super(name, creator);
+    }
 }
