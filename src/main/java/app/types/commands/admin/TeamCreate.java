@@ -1,12 +1,18 @@
 package app.types.commands.admin;
 
-import app.controllers.ExecuteController;
+import app.models.CLI;
 import app.types.Error;
 import app.types.commands.Command;
 
 public class TeamCreate implements Command {
 
-    public Error execute(String[] arguments, ExecuteController executeController) {
+    private final CLI cli;
+
+    public TeamCreate(CLI cli){
+        this.cli = cli;
+    }
+
+    public Error execute(String[] arguments) {
         return Error.NULL;
     }
 }

@@ -1,8 +1,7 @@
 package app.types;
 
-import app.controllers.ExecuteController;
+import app.models.CLI;
 import app.types.commands.Command;
-import app.types.commands.NotACommand;
 import app.types.commands.admin.PlayerCreate;
 import app.types.commands.admin.PlayerDelete;
 import app.types.commands.admin.TeamCreate;
@@ -18,62 +17,40 @@ import app.types.commands.common.Logout;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum CommandManager {
-    PLAYER_CREATE("player_create",new PlayerCreate()),
-    TEAM_CREATE("team_create",new TeamCreate()),
-    PLAYER_DELETE("player_delete",new PlayerDelete()),
-    TEAM_DELETE("team_delete",new TeamDelete()),
-    TEAM_ADD("team_add",new TeamAdd()),
-    TEAM_REMOVE("team_remove",new TeamRemove()),
-    TOURNAMENT_CREATE("tournament_create",new TournamentCreate()),
-    TOURNAMENT_REMOVE("tournament_delete",new TournamentDelete()),
-    TOURNAMENT_MATCHMAKING("tournament_matchmaking",new TournamentMatchmaking()),
-    LOGIN("login",new Login()),
-    LOGOUT("logout",new Logout()),
-    NOT_A_COMMAND("not_a_command",new NotACommand())
-    ;
+public class CommandManager {
+    private Map<String, Command> commands;
+    private final CLI cli;
 
-    private final String commandName;
-    private final Command executor;
+    public CommandManager(CLI cli) {
+        this.cli = cli;
+        this.commands = new HashMap<>();
 
-    private static final Map<String, CommandManager> COMMANDS_MAP = new HashMap<>();
-
-    static {
-        for (CommandManager cmd : CommandManager.values()) {
-            COMMANDS_MAP.put(cmd.getCommandName(), cmd);
-        }
+        this.commands.put("player_create",new PlayerCreate(cli));
+        this.commands.put("team_create",new TeamCreate(cli));
+        this.commands.put("player_delete",new PlayerDelete(cli));
+        this.commands.put("team_delete",new TeamDelete(cli));
+        this.commands.put("team_add",new TeamAdd(cli));
+        this.commands.put("team_remove",new TeamRemove(cli));
+        this.commands.put("tournament_create",new TournamentCreate(cli));
+        this.commands.put("tournament_delete",new TournamentDelete(cli));
+        this.commands.put("tournament_matchmaking",new TournamentMatchmaking(cli));
+        this.commands.put("login",new Login(cli));
+        this.commands.put("logout",new Logout(cli));
     }
 
-    CommandManager(String commandName, Command executor) {
-        this.commandName = commandName;
-        this.executor = executor;
+    public Command getCommand(String input) {
+        return this.commands.get(input);
     }
 
-    public static CommandManager getCommand(String input) {
-        CommandManager commandManager = COMMANDS_MAP.get(input);
-        if (commandManager == null) {
-            commandManager = COMMANDS_MAP.get("not_a_command");
-        }
-        return commandManager;
-    }
-
-    public String getCommandName(){
-        return this.commandName;
-    }
-
-    public Error getCommandError(){
+    public Error getCommandError(Command command){
         Error error;
 
-        if(this.commandName.equals(NOT_A_COMMAND.getCommandName())){
+        if(command == null){
             error = Error.INVALID_COMMAND;
         } else {
             error = Error.NULL;
         }
 
         return error;
-    }
-
-    public Error execute(String arguments, ExecuteController executeController){
-        return this.executor.execute(arguments.split(";"), executeController);
     }
 }

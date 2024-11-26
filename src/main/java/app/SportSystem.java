@@ -1,6 +1,5 @@
 package app;
 
-import app.controllers.ExecuteController;
 import app.controllers.ReadController;
 import app.models.CLI;
 import app.views.View;
