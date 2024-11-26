@@ -1,5 +1,6 @@
 package app.models.lists;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import app.models.lists.elements.Element;
@@ -20,6 +21,7 @@ public abstract class ListOfElements {
         if(!this.elementExists(index)){
            this.list.add(element);
         } else {
+            //Todo: Change error name to Element instead of player
             error = Error.PLAYER_ALREADY_EXISTS;
         }
 
@@ -60,6 +62,21 @@ public abstract class ListOfElements {
         }
 
         return error;
+    }
+
+    public Element getElementByIdentifier(String identifier){
+        assert identifier != null;
+
+        int i = 0;
+        while(i < this.list.size() && !this.list.get(i).getIdentifier().equals(identifier)){
+            i++;
+        }
+
+        if(this.elementExists(i)){
+            return this.list.get(i);
+        } else {
+            return null;
+        }
     }
 
     protected LinkedList<Element> getList(){

@@ -4,7 +4,9 @@ import app.models.lists.ListOfElements;
 import app.models.lists.PlayerList;
 import app.models.lists.TournamentList;
 import app.models.lists.UserList;
+import app.models.lists.elements.Element;
 import app.models.lists.elements.SinglePlayer;
+import app.models.lists.elements.Team;
 import app.types.users.Admin;
 import app.types.users.CommonUser;
 import app.types.users.User;
@@ -54,6 +56,25 @@ public class CLIApp {
         return error;
     }
 
+    public Error createTeam(Team team, String playerName){
+        Error error = Error.NULL;
+
+        SinglePlayer player = (SinglePlayer) this.lists[PLAYER_LIST].getElementByIdentifier(playerName);
+        if(player == null){
+            error = Error.PLAYER_DOES_NOT_EXIST;
+        } else {
+            error = team.addPlayer(player);
+            if(error.isNull()){
+                error = this.lists[TEAM_LIST].addElement(player);
+            } else {
+                error = this.lists[TEAM_LIST].addElement(team);
+            }
+
+        }
+
+        return error;
+    }
+
     public Error updateUser(String[] arguments){
         Error error = Error.NULL;
         int index = this.lists[USER_LIST].getIndexOfElement(arguments[IDENTIFIER]);
@@ -77,4 +98,6 @@ public class CLIApp {
     public User getCurrentUser(){
         return this.currentUser;
     }
+
+
 }
