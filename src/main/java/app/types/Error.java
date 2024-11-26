@@ -10,6 +10,7 @@ public enum Error {
     USER_LOGGED_IN,
     USER_ALREADY_EXISTS,
     USER_DOES_NOT_EXIST,
+    PLAYER_DOES_NOT_EXIST,
     NULL;
 
     public boolean isNull() {

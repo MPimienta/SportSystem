@@ -37,10 +37,19 @@ public class CLIApp {
         return lists[USER_LIST].addElement(admin);
     }
 
-    public Error playerCreate(SinglePlayer player){
+    public Error createPlayer(SinglePlayer player){
         Error error = lists[PLAYER_LIST].addElement(player);
         if(error.isNull()){
             lists[USER_LIST].addElement(player);
+        }
+        return error;
+    }
+
+    public Error deletePlayer(String player){
+        Error error = lists[PLAYER_LIST].removeElement(player);
+        if(error.isNull()){
+            lists[USER_LIST].removeElement(player);
+            //Todo: Search in every team list for the player to remove
         }
         return error;
     }

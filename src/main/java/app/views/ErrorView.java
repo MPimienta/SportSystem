@@ -12,6 +12,7 @@ public abstract class ErrorView {
             "\tThere is a user currently logged in",
             "\tUser already exists",
             "\tUser does not exist",
+            "\tPlayer does not exist",
     };
 
     public abstract void writeln(Error error);

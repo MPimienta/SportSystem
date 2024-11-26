@@ -49,6 +49,19 @@ public abstract class ListOfElements {
         return list.get(index);
     }
 
+    public Error removeElement(String identifier){
+        Error error = Error.NULL;
+        int index = this.getIndexOfElement(identifier);
+
+        if(this.elementExists(index)){
+            this.list.remove(index);
+        } else {
+            error = Error.PLAYER_DOES_NOT_EXIST;
+        }
+
+        return error;
+    }
+
     protected LinkedList<Element> getList(){
         return this.list;
     }

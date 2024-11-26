@@ -16,23 +16,13 @@ public class PlayerCreate implements Command {
         this.cliApp = cliApp;
     }
 
+
+
     public Error execute(String[] arguments){
-        Error error;
-        if(arguments.length < NECESSARY_ARGUMENTS){
-            error = Error.NOT_ENOUGH_ARGUMENTS;
-        } else {
-            error = this.playerCreate(arguments);
-        }
-
-        return error;
-    }
-
-    private Error playerCreate(String[] arguments){
         Error error;
         if(this.cliApp.getCurrentUserType() == UserType.ADMIN){
             Admin admin = (Admin) this.cliApp.getCurrentUser();
-            SinglePlayer player = this.makePlayer(arguments,admin);
-            error = this.cliApp.playerCreate(player);
+            error = this.playerCreate(arguments, admin);
         } else {
             error = Error.NOT_ADMIN;
         }
@@ -40,13 +30,20 @@ public class PlayerCreate implements Command {
         return error;
     }
 
-    private SinglePlayer makePlayer(String[] arguments, Admin admin){
-        final int USER_NAME = 0;
-        final int PASSWORD = 1;
-        final int NAME = 2;
-        final int LAST_NAME = 3;
+    private Error playerCreate(String[] arguments, Admin admin){
+        Error error;
+        if(arguments.length < NECESSARY_ARGUMENTS){
+            error = Error.NOT_ENOUGH_ARGUMENTS;
+        } else {
+            SinglePlayer player = this.makePlayer(arguments, admin);
+            error = this.cliApp.createPlayer(player);
+        }
 
-        return new SinglePlayer(arguments[USER_NAME], arguments[PASSWORD], arguments[NAME], arguments[LAST_NAME], admin);
+        return error;
+    }
+
+    private SinglePlayer makePlayer(String[] arguments, Admin admin){
+        return new SinglePlayer(arguments, admin);
     }
 
 
