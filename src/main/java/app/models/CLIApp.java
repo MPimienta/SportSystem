@@ -11,7 +11,7 @@ import app.types.users.User;
 import app.types.Error;
 import app.types.users.UserType;
 
-public class CLI {
+public class CLIApp {
     private static int IDENTIFIER = 0;
 
     private static int PLAYER_LIST = 0;
@@ -22,7 +22,7 @@ public class CLI {
     private ListOfElements[] lists;
     private User currentUser;
 
-    public CLI(){
+    public CLIApp(){
         this.lists = new ListOfElements[]{
                 new PlayerList(),
                 new UserList(),

@@ -1,15 +1,15 @@
 package app.types.commands.admin;
 
-import app.models.CLI;
+import app.models.CLIApp;
 import app.types.Error;
 import app.types.commands.Command;
 
 public class TeamDelete implements Command {
 
-    private final CLI cli;
+    private final CLIApp cliApp;
 
-    public TeamDelete(CLI cli){
-        this.cli = cli;
+    public TeamDelete(CLIApp cliApp){
+        this.cliApp = cliApp;
     }
 
     public Error execute(String[] arguments) {

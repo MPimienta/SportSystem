@@ -1,12 +1,12 @@
 package app.views;
 
-import app.controllers.ReadController;
+import app.controllers.CommandController;
 
 public abstract class View {
-    protected ReadController readController;
+    protected CommandController commandController;
 
-    public View(ReadController readController){
-        this.readController = readController;
+    public View(CommandController commandController){
+        this.commandController = commandController;
     }
 
     public abstract void read();

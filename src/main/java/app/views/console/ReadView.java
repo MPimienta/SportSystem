@@ -1,16 +1,16 @@
 package app.views.console;
 
-import app.controllers.ReadController;
+import app.controllers.CommandController;
 
 public class ReadView {
 
-    private ReadController readController;
+    private CommandController commandController;
 
-    ReadView(ReadController readController) {
-        this.readController = readController;
+    ReadView(CommandController commandController) {
+        this.commandController = commandController;
     }
 
     void interact() {
-        new CommandView(this.readController).interact();
+        new CommandView(this.commandController).interact();
     }
 }

@@ -1,6 +1,6 @@
 package app.types.commands.common;
 
-import app.models.CLI;
+import app.models.CLIApp;
 import app.types.Error;
 import app.types.commands.Command;
 import app.types.users.UserType;
@@ -8,10 +8,10 @@ import app.types.users.UserType;
 public class Login implements Command {
     private static final int NECESSARY_ARGUMENTS = 2;
 
-    private final CLI cli;
+    private final CLIApp cliApp;
 
-    public Login(CLI cli){
-        this.cli = cli;
+    public Login(CLIApp cliApp){
+        this.cliApp = cliApp;
     }
 
     public Error execute(String[] arguments) {
@@ -29,10 +29,10 @@ public class Login implements Command {
     public Error login(String[] arguments){
 
         Error error = Error.NULL;
-        if(this.cli.getCurrentUserType() != UserType.COMMON){
+        if(this.cliApp.getCurrentUserType() != UserType.COMMON){
             error = Error.USER_LOGGED_IN;
         } else {
-            error = this.cli.updateUser(arguments);
+            error = this.cliApp.updateUser(arguments);
         }
 
         return error;

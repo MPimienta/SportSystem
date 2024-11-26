@@ -1,16 +1,16 @@
 package app.types.commands.common;
 
-import app.models.CLI;
+import app.models.CLIApp;
 import app.types.Error;
 import app.types.commands.Command;
 import app.types.users.UserType;
 
 public class Logout implements Command {
 
-    private final CLI cli;
+    private final CLIApp cliApp;
 
-    public Logout(CLI cli){
-        this.cli = cli;
+    public Logout(CLIApp cliApp){
+        this.cliApp = cliApp;
     }
 
     public Error execute(String[] arguments) {
@@ -19,10 +19,10 @@ public class Logout implements Command {
 
     public Error logout(String[] arguments){
         Error error = Error.NULL;
-        if(this.cli.getCurrentUserType() == UserType.COMMON){
+        if(this.cliApp.getCurrentUserType() == UserType.COMMON){
             error = Error.ALREADY_LOGGED_OUT;
         } else {
-            this.cli.logout();
+            this.cliApp.logout();
         }
 
         return error;

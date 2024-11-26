@@ -1,16 +1,16 @@
 package app.controllers;
 
-import app.models.CLI;
+import app.models.CLIApp;
 import app.types.CommandManager;
 import app.types.Error;
 import app.types.commands.Command;
 
-public class ReadController extends Controller{
+public class CommandController extends Controller{
     private final CommandManager commandManager;
 
-    public ReadController(CLI cli){
-        super(cli);
-        this.commandManager = new CommandManager(cli);
+    public CommandController(CLIApp cliApp){
+        super(cliApp);
+        this.commandManager = new CommandManager(cliApp);
     }
 
     public Error getCommandError(Command command){

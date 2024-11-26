@@ -1,20 +1,20 @@
 package app;
 
-import app.controllers.ReadController;
-import app.models.CLI;
+import app.controllers.CommandController;
+import app.models.CLIApp;
 import app.views.View;
 import app.views.console.ConsoleView;
 
 public class SportSystem {
-    private final CLI cli;
+    private final CLIApp cliApp;
     private final View view;
-    private final ReadController readController;
+    private final CommandController commandController;
 
 
     private SportSystem(){
-        this.cli = new CLI();
-        this.readController = new ReadController(this.cli);
-        this.view = new ConsoleView(this.readController);
+        this.cliApp = new CLIApp();
+        this.commandController = new CommandController(this.cliApp);
+        this.view = new ConsoleView(this.commandController);
     }
 
     private void play() {

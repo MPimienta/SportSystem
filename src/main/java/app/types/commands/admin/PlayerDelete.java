@@ -1,15 +1,15 @@
 package app.types.commands.admin;
 
-import app.models.CLI;
+import app.models.CLIApp;
 import app.types.commands.Command;
 import app.types.Error;
 
 public class PlayerDelete implements Command {
 
-    private final CLI cli;
+    private final CLIApp cliApp;
 
-    public PlayerDelete(CLI cli){
-        this.cli = cli;
+    public PlayerDelete(CLIApp cliApp){
+        this.cliApp = cliApp;
     }
 
     public Error execute(String[] arguments) {
