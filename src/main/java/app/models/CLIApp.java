@@ -56,6 +56,10 @@ public class CLIApp {
         return error;
     }
 
+    public Error deleteTeam(String team){
+        return lists[TEAM_LIST].removeElement(team);
+    }
+
     public Error createTeam(Team team, String playerName){
         Error error = Error.NULL;
 
@@ -69,7 +73,6 @@ public class CLIApp {
             } else {
                 error = this.lists[TEAM_LIST].addElement(team);
             }
-
         }
 
         return error;

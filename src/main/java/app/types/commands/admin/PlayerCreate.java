@@ -16,8 +16,6 @@ public class PlayerCreate implements Command {
         this.cliApp = cliApp;
     }
 
-
-
     public Error execute(String[] arguments){
         Error error;
         if(this.cliApp.getCurrentUserType() == UserType.ADMIN){
