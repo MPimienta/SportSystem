@@ -13,6 +13,7 @@ public abstract class ErrorView {
             "\tUser already exists",
             "\tUser does not exist",
             "\tPlayer does not exist",
+            "\tWrong date format",
     };
 
     public abstract void writeln(Error error);

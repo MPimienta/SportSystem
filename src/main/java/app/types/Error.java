@@ -11,6 +11,7 @@ public enum Error {
     USER_ALREADY_EXISTS,
     USER_DOES_NOT_EXIST,
     PLAYER_DOES_NOT_EXIST,
+    WRONG_DATE_FORMAT,
     NULL;
 
     public boolean isNull() {

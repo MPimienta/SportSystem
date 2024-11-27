@@ -4,9 +4,9 @@ import app.models.lists.ListOfElements;
 import app.models.lists.PlayerList;
 import app.models.lists.TournamentList;
 import app.models.lists.UserList;
-import app.models.lists.elements.Element;
 import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
+import app.models.lists.elements.Tournament;
 import app.types.users.Admin;
 import app.types.users.CommonUser;
 import app.types.users.User;
@@ -76,6 +76,10 @@ public class CLIApp {
         }
 
         return error;
+    }
+
+    public Error createTournament(Tournament tournament){
+        return lists[TOURNAMENT_LIST].addElement(tournament);
     }
 
     public Error updateUser(String[] arguments){
