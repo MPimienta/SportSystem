@@ -17,4 +17,8 @@ public class Team extends Player{
     public Error addPlayer(SinglePlayer player){
         return this.players.addElement(player);
     }
+
+    public Error removePlayer(String player){
+        return this.players.removeElement(player);
+    }
 }

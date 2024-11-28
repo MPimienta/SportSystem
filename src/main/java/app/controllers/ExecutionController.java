@@ -98,5 +98,36 @@ public class ExecutionController extends Controller{
         return this.cliApp.deleteTournament(arguments[TOURNAMENT_IDENTIFIER]);
     }
 
+    public Error teamAdd(String[] arguments){
+        final int TEAM_NAME = 0;
+        final int PLAYER_NAME = 1;
+
+        SinglePlayer player = this.getPlayerByIdentifier(arguments[PLAYER_NAME]);
+        Team team = this.getTeamByIdentifier(arguments[TEAM_NAME]);
+
+        if(player != null && team != null){
+            return this.cliApp.teamAdd(team, player);
+        } else {
+            return Error.PLAYER_DOES_NOT_EXIST;
+        }
+    }
+
+    private Team getTeamByIdentifier(String name){
+        return this.cliApp.getTeamByIdentifier(name);
+    }
+
+    public Error teamRemove(String[] arguments){
+        final int TEAM_NAME = 0;
+        final int PLAYER_NAME = 1;
+
+        Team team = this.getTeamByIdentifier(arguments[TEAM_NAME]);
+
+        if(team != null){
+            return this.cliApp.teamRemove(team, arguments[PLAYER_NAME]);
+        } else {
+            return Error.PLAYER_DOES_NOT_EXIST;
+        }
+    }
+
 
 }

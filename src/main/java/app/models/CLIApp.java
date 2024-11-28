@@ -97,5 +97,17 @@ public class CLIApp {
         return (SinglePlayer) this.lists[PLAYER_LIST].getElementByIdentifier(name);
     }
 
+    public Team getTeamByIdentifier(String name){
+        return (Team) this.lists[TEAM_LIST].getElementByIdentifier(name);
+    }
+
+    public Error teamAdd(Team team, SinglePlayer player){
+        return team.addPlayer(player);
+    }
+
+    public Error teamRemove(Team team, String player){
+        return team.removePlayer(player);
+    }
+
 
 }
