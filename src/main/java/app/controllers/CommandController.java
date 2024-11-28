@@ -1,7 +1,6 @@
 package app.controllers;
 
 import app.models.CLIApp;
-import app.types.commands.managers.CommandManager;
 import app.types.Error;
 import app.types.commands.Command;
 import app.types.users.User;

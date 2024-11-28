@@ -3,9 +3,8 @@ package app.types.users;
 import app.models.CLIApp;
 import app.types.Error;
 import app.types.commands.Command;
-import app.types.commands.managers.AdminCommandManager;
-import app.types.commands.managers.CommandManager;
-import app.types.commands.managers.CommonCommandManager;
+import app.types.managers.CommandManager;
+import app.types.managers.CommonCommandManager;
 
 public class CommonUser implements User{
     private final UserType userType;

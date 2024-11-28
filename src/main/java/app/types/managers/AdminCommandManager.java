@@ -1,4 +1,4 @@
-package app.types.commands.managers;
+package app.types.managers;
 
 import app.models.CLIApp;
 import app.types.commands.admin.*;

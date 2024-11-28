@@ -1,4 +1,4 @@
-package app.types.commands.managers;
+package app.types.managers;
 
 public class PlayerCommandManager {
 }
