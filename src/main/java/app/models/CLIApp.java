@@ -62,11 +62,12 @@ public class CLIApp {
 
     public Error deleteTeam(String team){
         return lists[TEAM_LIST].removeElement(team);
+        //Todo: Search in every tournament list for the team to remove
     }
 
-
-
-
+    public Error deleteTournament(String tournament){
+        return lists[TOURNAMENT_LIST].removeElement(tournament);
+    }
 
     public Error updateUser(String[] arguments){
         Error error = Error.NULL;

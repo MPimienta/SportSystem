@@ -93,6 +93,10 @@ public class ExecutionController extends Controller{
         return new Tournament(arguments, dates);
     }
 
+    public Error deleteTournament(String[] arguments){
+        final int TOURNAMENT_IDENTIFIER = 0;
+        return this.cliApp.deleteTournament(arguments[TOURNAMENT_IDENTIFIER]);
+    }
 
 
 }
