@@ -4,8 +4,12 @@ import app.models.CLIApp;
 import app.models.lists.elements.Element;
 import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
+import app.models.lists.elements.Tournament;
 import app.types.Error;
 import app.types.users.Admin;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class ExecutionController extends Controller{
     public ExecutionController(CLIApp cliApp) {
@@ -58,6 +62,35 @@ public class ExecutionController extends Controller{
     public Error deleteTeam(String[] arguments){
         final int PLAYER_IDENTIFIER = 0;
         return this.cliApp.deletePlayer(arguments[PLAYER_IDENTIFIER]);
+    }
+
+    public Error createTournament(String[] arguments){
+        final int START_DATE = 3;
+        final int END_DATE = 4;
+
+        Error error;
+        try{
+            Admin admin = (Admin) this.cliApp.getCurrentUser();
+            String[] stringDates = new String[]{arguments[START_DATE], arguments[END_DATE]};
+            LocalDate[] dates = this.makeDates(stringDates);
+            Tournament tournament = this.makeTournament(arguments, dates);
+            error = this.cliApp.createTournament(tournament);
+        } catch(DateTimeParseException ex){
+            error = Error.WRONG_DATE_FORMAT;
+        }
+        return error;
+    }
+
+    private LocalDate[] makeDates(String[] arguments){
+        LocalDate[] dates = new LocalDate[2];
+        for (int i = 0; i < 2; i++) {
+            dates[i] = LocalDate.parse(arguments[i]);
+        }
+        return dates;
+    }
+
+    private Tournament makeTournament(String[] arguments, LocalDate[] dates){
+        return new Tournament(arguments, dates);
     }
 
 
