@@ -1,12 +1,10 @@
 package app.types.commands.admin;
 
 import app.models.CLIApp;
-import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
 import app.types.Error;
 import app.types.commands.Command;
 import app.types.users.Admin;
-import app.types.users.UserType;
 
 public class TeamCreate implements Command {
     private static final int NECESSARY_ARGUMENTS = 2;

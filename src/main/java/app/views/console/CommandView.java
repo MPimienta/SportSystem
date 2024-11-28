@@ -16,12 +16,7 @@ public class CommandView {
     }
 
     void interact() {
-        this.readCommand();
-    }
-
-    void readCommand(){
-        new MessageView().write(Message.INPUT_COMMAND);
-        String[] input = this.getInput();
+        String[] input =  this.readCommand();
         Command command = this.getCommand(input);
         String arguments = this.getArguments(input);
         Error error = this.getCommandError(command);
@@ -29,7 +24,11 @@ public class CommandView {
         if (error.isNull()){
             this.execute(command, arguments);
         }
+    }
 
+    private String[] readCommand(){
+        new MessageView().write(Message.INPUT_COMMAND);
+        return this.getInput();
     }
 
     private String[] getInput(){
@@ -51,11 +50,8 @@ public class CommandView {
 
         Error error = this.commandController.executeCommand(command, arguments);
         new ErrorView().writeln(error);
-
     }
 
-
-    //Todo: Put this method somewhere else (perhaps the command manager
     private String getArguments(String[] input){
         if(input.length > 1){
             return input[ARGUMENTS];

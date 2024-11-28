@@ -4,16 +4,15 @@ import app.controllers.CommandController;
 import app.views.View;
 
 public class ConsoleView extends View {
-    private ReadView readView;
+    private final CommandView commandView;
 
     public ConsoleView(CommandController commandController){
         super(commandController);
-        this.readView = new ReadView(this.commandController);
+        this.commandView = new CommandView(this.commandController);
     }
 
-    @Override
     public void read() {
-        this.readView.interact();
+        this.commandView.interact();
     }
 
 }
