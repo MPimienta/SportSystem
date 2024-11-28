@@ -109,5 +109,16 @@ public class CLIApp {
         return team.removePlayer(player);
     }
 
+    public Tournament getTournamentByIdentifier(String tournament){
+        return (Tournament) this.lists[TOURNAMENT_LIST].getElementByIdentifier(tournament);
+    }
+
+    public Error manualMatchmake(Tournament tournament){
+
+    }
+
+    public Error randomMatchmake(Tournament tournament){
+
+    }
 
 }

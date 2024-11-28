@@ -129,5 +129,29 @@ public class ExecutionController extends Controller{
         }
     }
 
+    public Error tournamentMatchmaking(String[] arguments){
+        final int TOURNAMENT_NAME = 0;
+        final int MATCHMAKING = 1;
+
+        Error error = Error.NULL;
+
+        Tournament tournament = this.getTournamentByIdentifier(arguments[TOURNAMENT_NAME]);
+        if(tournament != null){
+            if(arguments[MATCHMAKING].equals("-a")){
+                error = this.cliApp.randomMatchmake(tournament);
+            } else if(arguments[MATCHMAKING].equals("-m")){
+                error = this.cliApp.manualMatchmake(tournament);
+            }
+        } else {
+            error = Error.PLAYER_DOES_NOT_EXIST;
+        }
+
+        return error;
+    }
+
+    private Tournament getTournamentByIdentifier(String name){
+        return this.cliApp.getTournamentByIdentifier(name);
+    }
+
 
 }
