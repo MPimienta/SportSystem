@@ -14,10 +14,6 @@ public class Logout implements Command {
     }
 
     public Error execute(String[] arguments) {
-        return this.logout(arguments);
-    }
-
-    public Error logout(String[] arguments){
         Error error = Error.NULL;
         if(this.cliApp.getCurrentUserType() == UserType.COMMON){
             error = Error.ALREADY_LOGGED_OUT;
@@ -27,4 +23,5 @@ public class Logout implements Command {
 
         return error;
     }
+
 }

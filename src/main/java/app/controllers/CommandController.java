@@ -1,20 +1,20 @@
 package app.controllers;
 
 import app.models.CLIApp;
-import app.types.CommandManager;
+import app.types.commands.managers.CommandManager;
 import app.types.Error;
 import app.types.commands.Command;
+import app.types.users.User;
 
 public class CommandController extends Controller{
-    private final CommandManager commandManager;
 
     public CommandController(CLIApp cliApp){
         super(cliApp);
-        this.commandManager = new CommandManager(cliApp);
     }
 
     public Error getCommandError(Command command){
-        return commandManager.getCommandError(command);
+        User currentUser = this.cliApp.getCurrentUser();
+        return currentUser.getCommandError(command);
     }
 
     public Error executeCommand(Command command, String arguments){
@@ -22,6 +22,7 @@ public class CommandController extends Controller{
     }
 
     public Command getCommand(String commandName){
-        return commandManager.getCommand(commandName);
+        User currentUser = this.cliApp.getCurrentUser();
+        return currentUser.getCommand(commandName);
     }
 }

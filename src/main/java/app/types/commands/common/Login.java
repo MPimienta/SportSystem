@@ -26,7 +26,7 @@ public class Login implements Command {
         return error;
     }
 
-    public Error login(String[] arguments){
+    private Error login(String[] arguments){
 
         Error error = Error.NULL;
         if(this.cliApp.getCurrentUserType() != UserType.COMMON){

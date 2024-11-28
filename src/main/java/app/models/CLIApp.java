@@ -31,9 +31,9 @@ public class CLIApp {
                 new PlayerList(),
                 new TournamentList()
         };
-        this.currentUser = new CommonUser();
+        this.currentUser = new CommonUser(this);
 
-        this.AdminCreate(new Admin("sudo", "sudopassword"));
+        this.AdminCreate(new Admin("sudo", "sudopassword",this));
     }
     public Error AdminCreate(Admin admin){
         return lists[USER_LIST].addElement(admin);
@@ -95,7 +95,7 @@ public class CLIApp {
     }
 
     public void logout(){
-        this.currentUser = new CommonUser();
+        this.currentUser = new CommonUser(this);
     }
 
     public UserType getCurrentUserType(){

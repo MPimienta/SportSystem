@@ -1,5 +1,7 @@
 package app.models.lists.elements;
 
+import app.types.Error;
+import app.types.commands.Command;
 import app.types.users.Admin;
 import app.types.users.User;
 import app.types.users.UserType;
@@ -33,5 +35,15 @@ public class SinglePlayer extends Player implements User {
 
     public String getPassword() {
         return this.password;
+    }
+
+    @Override
+    public Command getCommand(String commandName) {
+        return null;
+    }
+
+    @Override
+    public Error getCommandError(Command command) {
+        return null;
     }
 }

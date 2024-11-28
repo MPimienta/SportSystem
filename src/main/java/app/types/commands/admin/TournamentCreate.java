@@ -22,22 +22,11 @@ public class TournamentCreate implements Command {
 
     public Error execute(String[] arguments){
         Error error;
-        if(this.cliApp.getCurrentUserType() == UserType.ADMIN){
-            Admin admin = (Admin) this.cliApp.getCurrentUser();
-            error = this.tournamentCreate(arguments, admin);
-        } else {
-            error = Error.NOT_ADMIN;
-        }
-
-        return error;
-    }
-
-    private Error tournamentCreate(String[] arguments, Admin admin){
-        Error error;
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
             try{
+                Admin admin = (Admin) this.cliApp.getCurrentUser();
                 String[] stringDates = new String[]{arguments[3], arguments[4]};
                 LocalDate[] dates = this.makeDates(stringDates);
                 Tournament tournament = this.makeTournament(arguments, dates);
@@ -45,7 +34,6 @@ public class TournamentCreate implements Command {
             } catch(DateTimeParseException ex){
                 error = Error.WRONG_DATE_FORMAT;
             }
-
         }
 
         return error;

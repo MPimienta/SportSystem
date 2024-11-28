@@ -19,24 +19,13 @@ public class TeamCreate implements Command {
 
     public Error execute(String[] arguments){
         Error error;
-        if(this.cliApp.getCurrentUserType() == UserType.ADMIN){
-            Admin admin = (Admin) this.cliApp.getCurrentUser();
-            error = this.teamCreate(arguments, admin);
-        } else {
-            error = Error.NOT_ADMIN;
-        }
 
-        return error;
-    }
-
-    private Error teamCreate(String[] arguments, Admin admin){
-        Error error;
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
+            Admin admin = (Admin) this.cliApp.getCurrentUser();
             Team team = this.makeTeam(arguments, admin);
             error = this.cliApp.createTeam(team, arguments[1]);
-
         }
 
         return error;

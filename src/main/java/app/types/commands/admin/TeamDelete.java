@@ -16,17 +16,6 @@ public class TeamDelete implements Command {
 
     public Error execute(String[] arguments){
         Error error;
-        if(this.cliApp.getCurrentUserType() == UserType.ADMIN){
-            error = this.teamDelete(arguments);
-        } else {
-            error = Error.NOT_ADMIN;
-        }
-
-        return error;
-    }
-
-    private Error teamDelete(String[] arguments){
-        Error error;
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {

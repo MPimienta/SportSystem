@@ -16,25 +16,11 @@ public class PlayerDelete implements Command {
 
     public Error execute(String[] arguments){
         Error error;
-        if(this.cliApp.getCurrentUserType() == UserType.ADMIN){
-            error = this.playerDelete(arguments);
-        } else {
-            error = Error.NOT_ADMIN;
-        }
-
-        return error;
-    }
-
-    private Error playerDelete(String[] arguments){
-        Error error;
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
             error = this.cliApp.deletePlayer(arguments[0]);
         }
-
         return error;
     }
-
-
 }
