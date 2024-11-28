@@ -1,5 +1,6 @@
 package app.types.commands.admin;
 
+import app.controllers.ExecutionController;
 import app.models.CLIApp;
 import app.models.lists.elements.Team;
 import app.types.Error;
@@ -21,15 +22,11 @@ public class TeamCreate implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            Admin admin = (Admin) this.cliApp.getCurrentUser();
-            Team team = this.makeTeam(arguments, admin);
-            error = this.cliApp.createTeam(team, arguments[1]);
+            ExecutionController controller = new ExecutionController(this.cliApp);
+            error = controller.createTeam(arguments);
         }
 
         return error;
     }
 
-    private Team makeTeam(String[] arguments, Admin admin){
-        return new Team(arguments[0], admin);
-    }
 }

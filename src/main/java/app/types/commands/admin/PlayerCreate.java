@@ -1,5 +1,6 @@
 package app.types.commands.admin;
 
+import app.controllers.ExecutionController;
 import app.models.CLIApp;
 import app.models.lists.elements.SinglePlayer;
 import app.types.commands.Command;
@@ -20,17 +21,9 @@ public class PlayerCreate implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            Admin admin = (Admin) this.cliApp.getCurrentUser();
-            SinglePlayer player = this.makePlayer(arguments, admin);
-            error = this.cliApp.createPlayer(player);
+            ExecutionController controller = new ExecutionController(this.cliApp);
+            error = controller.createPlayer(arguments);
         }
-
         return error;
     }
-
-    private SinglePlayer makePlayer(String[] arguments, Admin admin){
-        return new SinglePlayer(arguments, admin);
-    }
-
-
 }

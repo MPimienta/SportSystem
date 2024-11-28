@@ -4,6 +4,7 @@ import app.models.lists.ListOfElements;
 import app.models.lists.PlayerList;
 import app.models.lists.TournamentList;
 import app.models.lists.UserList;
+import app.models.lists.elements.Element;
 import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
 import app.models.lists.elements.Tournament;
@@ -32,19 +33,22 @@ public class CLIApp {
                 new TournamentList()
         };
         this.currentUser = new CommonUser(this);
-
-        this.AdminCreate(new Admin("sudo", "sudopassword",this));
+        this.createUser(new Admin("sudo", "sudopassword",this));
     }
-    public Error AdminCreate(Admin admin){
-        return lists[USER_LIST].addElement(admin);
+    public Error createUser(User user){
+        return lists[USER_LIST].addElement(user);
     }
 
     public Error createPlayer(SinglePlayer player){
-        Error error = lists[PLAYER_LIST].addElement(player);
-        if(error.isNull()){
-            lists[USER_LIST].addElement(player);
-        }
-        return error;
+        return this.lists[PLAYER_LIST].addElement(player);
+    }
+
+    public Error createTeam(Team team){
+        return this.lists[TEAM_LIST].addElement(team);
+    }
+
+    public Error createTournament(Tournament tournament){
+        return lists[TOURNAMENT_LIST].addElement(tournament);
     }
 
     public Error deletePlayer(String player){
@@ -60,27 +64,9 @@ public class CLIApp {
         return lists[TEAM_LIST].removeElement(team);
     }
 
-    public Error createTeam(Team team, String playerName){
-        Error error = Error.NULL;
 
-        SinglePlayer player = (SinglePlayer) this.lists[PLAYER_LIST].getElementByIdentifier(playerName);
-        if(player == null){
-            error = Error.PLAYER_DOES_NOT_EXIST;
-        } else {
-            error = team.addPlayer(player);
-            if(error.isNull()){
-                error = this.lists[TEAM_LIST].addElement(player);
-            } else {
-                error = this.lists[TEAM_LIST].addElement(team);
-            }
-        }
 
-        return error;
-    }
 
-    public Error createTournament(Tournament tournament){
-        return lists[TOURNAMENT_LIST].addElement(tournament);
-    }
 
     public Error updateUser(String[] arguments){
         Error error = Error.NULL;
@@ -104,6 +90,10 @@ public class CLIApp {
 
     public User getCurrentUser(){
         return this.currentUser;
+    }
+
+    public SinglePlayer getPlayerByIdentifier(String name){
+        return (SinglePlayer) this.lists[PLAYER_LIST].getElementByIdentifier(name);
     }
 
 

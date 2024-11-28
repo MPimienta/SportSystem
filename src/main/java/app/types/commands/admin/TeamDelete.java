@@ -1,5 +1,6 @@
 package app.types.commands.admin;
 
+import app.controllers.ExecutionController;
 import app.models.CLIApp;
 import app.types.Error;
 import app.types.commands.Command;
@@ -19,7 +20,8 @@ public class TeamDelete implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            error = this.cliApp.deleteTeam(arguments[0]);
+            ExecutionController controller = new ExecutionController(this.cliApp);
+            error = controller.deleteTeam(arguments);
         }
 
         return error;
