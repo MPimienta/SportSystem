@@ -1,7 +1,8 @@
 package app.views;
 
 public enum Message {
-    INPUT_COMMAND(">>>");
+    INPUT_COMMAND(">>>"),
+    LIST_OF_PLAYERS("----List of players----");
 
     private String message;
 
@@ -9,7 +10,6 @@ public enum Message {
         this.message = message;
     }
 
-    @Override
     public String toString() {
         return message;
     }

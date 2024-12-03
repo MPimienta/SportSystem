@@ -19,4 +19,8 @@ public class AdminCommandManager extends CommandManager{
         this.getCommandList().put("tournament_matchmaking",new TournamentMatchmaking(sportManagementSystem));
     }
 
+    public void putCommands(){
+
+    }
+
 }

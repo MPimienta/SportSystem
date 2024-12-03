@@ -4,6 +4,7 @@ import app.models.lists.ListOfElements;
 import app.models.lists.PlayerList;
 import app.models.lists.TournamentList;
 import app.models.lists.UserList;
+import app.models.lists.elements.Player;
 import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
 import app.models.lists.elements.Tournament;
@@ -112,8 +113,8 @@ public class SportManagementSystem {
         return (Tournament) this.lists[TOURNAMENT_LIST].getElementByIdentifier(tournament);
     }
 
-    public Error manualMatchmake(Tournament tournament){
-
+    public Error manualMatchmake(Tournament tournament, Player[] players){
+        return tournament.manualMatchmake(players);
     }
 
     public Error randomMatchmake(Tournament tournament){

@@ -51,7 +51,11 @@ public class Tournament implements Element {
         return error;
     }
 
-    public Error manualMatchmake(){
+    public Error manualMatchmake(Player[] players){
+        return this.matchList.manualMatchmake(players);
+    }
 
+    public PlayerList getPlayerList(){
+        return this.playerList;
     }
 }

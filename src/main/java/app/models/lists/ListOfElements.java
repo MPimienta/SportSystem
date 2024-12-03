@@ -1,5 +1,6 @@
 package app.models.lists;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import app.models.lists.elements.Element;
@@ -55,7 +56,7 @@ public abstract class ListOfElements {
         if(this.elementExists(index)){
             this.list.remove(index);
         } else {
-            error = Error.PLAYER_DOES_NOT_EXIST;
+            error = Error.ELEMENT_DOES_NOT_EXIST;
         }
 
         return error;
@@ -82,5 +83,14 @@ public abstract class ListOfElements {
 
     public int getSize(){
         return this.list.size();
+    }
+
+    public String toString(){
+        Iterator<Element> iterator = this.list.iterator();
+        String result = "";
+        while(iterator.hasNext()){
+            result = result + iterator.next().toString() + "\n";
+        }
+        return result;
     }
 }
