@@ -4,7 +4,6 @@ import app.models.lists.elements.Element;
 import app.models.lists.elements.Match;
 import app.models.lists.elements.Player;
 import app.types.Error;
-import app.types.users.Admin;
 
 import java.util.Iterator;
 import java.util.Random;

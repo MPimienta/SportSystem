@@ -156,7 +156,7 @@ public class ExecutionController extends Controller{
         Error error;
         String[] playerIdentifiers = new String[]{arguments[PLAYER_1], arguments[PlAYER_2]};
         Player[] players = this.getPlayers(playerIdentifiers);
-        if(players[PLAYER_1] == null || players[PlAYER_2] == null){
+        if(players[0] == null || players[1] == null){
             error = Error.ELEMENT_DOES_NOT_EXIST;
         } else {
             error = this.sportManagementSystem.manualMatchmake(tournament, players);
