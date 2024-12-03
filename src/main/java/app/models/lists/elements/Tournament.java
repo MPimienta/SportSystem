@@ -58,4 +58,25 @@ public class Tournament implements Element {
     public PlayerList getPlayerList(){
         return this.playerList;
     }
+
+    public Error removePlayer(String player){
+        return this.playerList.removeElement(player);
+    }
+
+    public boolean hasPlayer(String identifier){
+        if(this.playerList.getElementByIdentifier(identifier) != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isOngoing(){
+        LocalDate currentDate = LocalDate.now();
+        if(currentDate.isBefore(this.dates[END_DATE]) && currentDate.isAfter(this.dates[START_DATE])){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -13,6 +13,7 @@ public enum Error {
     ELEMENT_DOES_NOT_EXIST,
     WRONG_DATE_FORMAT,
     UNEVEN_AMOUNT_OF_PLAYERS,
+    PLAYER_IN_ONGOING_TOURNAMENT,
     NULL;
 
     public boolean isNull() {
