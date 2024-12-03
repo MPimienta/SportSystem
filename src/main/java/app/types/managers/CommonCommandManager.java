@@ -1,9 +1,9 @@
 package app.types.managers;
 
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 
 public class CommonCommandManager extends CommandManager{
-    public CommonCommandManager(CLIApp cliApp) {
-        super(cliApp);
+    public CommonCommandManager(SportManagementSystem sportManagementSystem) {
+        super(sportManagementSystem);
     }
 }

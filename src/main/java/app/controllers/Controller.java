@@ -1,11 +1,11 @@
 package app.controllers;
 
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 
 public abstract class Controller {
-    protected CLIApp cliApp;
+    protected SportManagementSystem sportManagementSystem;
 
-    Controller(CLIApp cliApp) {
-        this.cliApp = cliApp;
+    Controller(SportManagementSystem sportManagementSystem) {
+        this.sportManagementSystem = sportManagementSystem;
     }
 }

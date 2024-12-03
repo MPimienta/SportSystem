@@ -1,6 +1,6 @@
 package app.types.users;
 
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
 import app.types.managers.AdminCommandManager;
@@ -12,11 +12,11 @@ public class Admin implements User{
     private final String password;
     private final CommandManager commandManager;
 
-    public Admin(String userName, String password, CLIApp cliApp){
+    public Admin(String userName, String password, SportManagementSystem sportManagementSystem){
         this.userType = UserType.ADMIN;
         this.userName = userName;
         this.password = password;
-        this.commandManager = new AdminCommandManager(cliApp);
+        this.commandManager = new AdminCommandManager(sportManagementSystem);
     }
 
     public UserType getUserType(){

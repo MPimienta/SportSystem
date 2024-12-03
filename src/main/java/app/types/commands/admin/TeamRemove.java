@@ -1,17 +1,17 @@
 package app.types.commands.admin;
 
 import app.controllers.ExecutionController;
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
 
 public class TeamRemove implements Command {
     private static final int NECESSARY_ARGUMENTS = 2;
 
-    private final CLIApp cliApp;
+    private final SportManagementSystem sportManagementSystem;
 
-    public TeamRemove(CLIApp cliApp){
-        this.cliApp = cliApp;
+    public TeamRemove(SportManagementSystem sportManagementSystem){
+        this.sportManagementSystem = sportManagementSystem;
     }
 
     public Error execute(String[] arguments){
@@ -19,7 +19,7 @@ public class TeamRemove implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            ExecutionController controller = new ExecutionController(this.cliApp);
+            ExecutionController controller = new ExecutionController(this.sportManagementSystem);
             error = controller.teamRemove(arguments);
         }
 

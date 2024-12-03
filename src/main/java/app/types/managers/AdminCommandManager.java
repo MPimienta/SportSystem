@@ -1,22 +1,22 @@
 package app.types.managers;
 
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.types.commands.admin.*;
 
 public class AdminCommandManager extends CommandManager{
 
-    public AdminCommandManager(CLIApp cliApp){
-        super(cliApp);
+    public AdminCommandManager(SportManagementSystem sportManagementSystem){
+        super(sportManagementSystem);
 
-        this.getCommandList().put("player_create",new PlayerCreate(cliApp));
-        this.getCommandList().put("team_create",new TeamCreate(cliApp));
-        this.getCommandList().put("player_delete",new PlayerDelete(cliApp));
-        this.getCommandList().put("team_delete",new TeamDelete(cliApp));
-        this.getCommandList().put("team_add",new TeamAdd(cliApp));
-        this.getCommandList().put("team_remove",new TeamRemove(cliApp));
-        this.getCommandList().put("tournament_create",new TournamentCreate(cliApp));
-        this.getCommandList().put("tournament_delete",new TournamentDelete(cliApp));
-        this.getCommandList().put("tournament_matchmaking",new TournamentMatchmaking(cliApp));
+        this.getCommandList().put("player_create",new PlayerCreate(sportManagementSystem));
+        this.getCommandList().put("team_create",new TeamCreate(sportManagementSystem));
+        this.getCommandList().put("player_delete",new PlayerDelete(sportManagementSystem));
+        this.getCommandList().put("team_delete",new TeamDelete(sportManagementSystem));
+        this.getCommandList().put("team_add",new TeamAdd(sportManagementSystem));
+        this.getCommandList().put("team_remove",new TeamRemove(sportManagementSystem));
+        this.getCommandList().put("tournament_create",new TournamentCreate(sportManagementSystem));
+        this.getCommandList().put("tournament_delete",new TournamentDelete(sportManagementSystem));
+        this.getCommandList().put("tournament_matchmaking",new TournamentMatchmaking(sportManagementSystem));
     }
 
 }

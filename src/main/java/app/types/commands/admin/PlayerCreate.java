@@ -1,19 +1,17 @@
 package app.types.commands.admin;
 
 import app.controllers.ExecutionController;
-import app.models.CLIApp;
-import app.models.lists.elements.SinglePlayer;
+import app.models.SportManagementSystem;
 import app.types.commands.Command;
 import app.types.Error;
-import app.types.users.Admin;
 
 public class PlayerCreate implements Command {
     private static final int NECESSARY_ARGUMENTS = 4;
 
-    private final CLIApp cliApp;
+    private final SportManagementSystem sportManagementSystem;
 
-    public PlayerCreate(CLIApp cliApp){
-        this.cliApp = cliApp;
+    public PlayerCreate(SportManagementSystem sportManagementSystem){
+        this.sportManagementSystem = sportManagementSystem;
     }
 
     public Error execute(String[] arguments){
@@ -21,7 +19,7 @@ public class PlayerCreate implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            ExecutionController controller = new ExecutionController(this.cliApp);
+            ExecutionController controller = new ExecutionController(this.sportManagementSystem);
             error = controller.createPlayer(arguments);
         }
         return error;

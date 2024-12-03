@@ -1,24 +1,24 @@
 package app.types.commands.common;
 
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
 import app.types.users.UserType;
 
 public class Logout implements Command {
 
-    private final CLIApp cliApp;
+    private final SportManagementSystem sportManagementSystem;
 
-    public Logout(CLIApp cliApp){
-        this.cliApp = cliApp;
+    public Logout(SportManagementSystem sportManagementSystem){
+        this.sportManagementSystem = sportManagementSystem;
     }
 
     public Error execute(String[] arguments) {
         Error error = Error.NULL;
-        if(this.cliApp.getCurrentUserType() == UserType.COMMON){
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.COMMON){
             error = Error.ALREADY_LOGGED_OUT;
         } else {
-            this.cliApp.logout();
+            this.sportManagementSystem.logout();
         }
 
         return error;

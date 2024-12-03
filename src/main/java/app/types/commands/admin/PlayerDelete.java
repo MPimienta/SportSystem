@@ -1,18 +1,17 @@
 package app.types.commands.admin;
 
 import app.controllers.ExecutionController;
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.types.commands.Command;
 import app.types.Error;
-import app.types.users.UserType;
 
 public class PlayerDelete implements Command {
     private static final int NECESSARY_ARGUMENTS = 1;
 
-    private final CLIApp cliApp;
+    private final SportManagementSystem sportManagementSystem;
 
-    public PlayerDelete(CLIApp cliApp){
-        this.cliApp = cliApp;
+    public PlayerDelete(SportManagementSystem sportManagementSystem){
+        this.sportManagementSystem = sportManagementSystem;
     }
 
     public Error execute(String[] arguments){
@@ -20,7 +19,7 @@ public class PlayerDelete implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            ExecutionController controller = new ExecutionController(this.cliApp);
+            ExecutionController controller = new ExecutionController(this.sportManagementSystem);
             error = controller.deletePlayer(arguments);
         }
         return error;

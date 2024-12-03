@@ -1,16 +1,15 @@
 package app.controllers;
 
-import app.models.CLIApp;
-import app.models.lists.elements.Player;
+import app.models.SportManagementSystem;
 import app.models.lists.elements.SinglePlayer;
 import app.types.Error;
 import app.types.users.Admin;
 
 public class PlayerController {
-    private final CLIApp cliApp;
+    private final SportManagementSystem sportManagementSystem;
 
-    public PlayerController(CLIApp cliApp){
-        this.cliApp = cliApp;
+    public PlayerController(SportManagementSystem sportManagementSystem){
+        this.sportManagementSystem = sportManagementSystem;
     }
 
     private Error playerCreate(String[] arguments, Admin admin){
@@ -20,7 +19,7 @@ public class PlayerController {
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
             SinglePlayer player = this.makePlayer(arguments, admin);
-            error = this.cliApp.createPlayer(player);
+            error = this.sportManagementSystem.createPlayer(player);
         }
 
         return error;

@@ -1,7 +1,6 @@
 package app.types.managers;
 
-import app.models.CLIApp;
-import app.types.Error;
+import app.models.SportManagementSystem;
 import app.types.commands.Command;
 import app.types.commands.common.Login;
 import app.types.commands.common.Logout;
@@ -12,11 +11,11 @@ import java.util.Map;
 public abstract class CommandManager {
     private final Map<String, Command> commands;
 
-    public CommandManager(CLIApp cliApp) {
+    public CommandManager(SportManagementSystem sportManagementSystem) {
         this.commands = new HashMap<>();
 
-        this.getCommandList().put("login",new Login(cliApp));
-        this.getCommandList().put("logout",new Logout(cliApp));
+        this.getCommandList().put("login",new Login(sportManagementSystem));
+        this.getCommandList().put("logout",new Logout(sportManagementSystem));
     }
 
     public Command getCommand(String input) {

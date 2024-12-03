@@ -1,11 +1,9 @@
 package app.models.lists;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import app.models.lists.elements.Element;
 import app.types.Error;
-import app.types.users.Admin;
 
 public abstract class ListOfElements {
     private final LinkedList<Element> list;
@@ -21,8 +19,7 @@ public abstract class ListOfElements {
         if(!this.elementExists(index)){
            this.list.add(element);
         } else {
-            //Todo: Change error name to Element instead of player
-            error = Error.PLAYER_ALREADY_EXISTS;
+            error = Error.ELEMENT_ALREADY_EXISTS;
         }
 
         return error;
@@ -81,5 +78,9 @@ public abstract class ListOfElements {
 
     protected LinkedList<Element> getList(){
         return this.list;
+    }
+
+    public int getSize(){
+        return this.list.size();
     }
 }

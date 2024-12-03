@@ -1,16 +1,16 @@
 package app.types.commands.admin;
 
 import app.controllers.ExecutionController;
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
 
 public class TournamentDelete implements Command {
     private static final int NECESSARY_ARGUMENTS = 1;
-    private final CLIApp cliApp;
+    private final SportManagementSystem sportManagementSystem;
 
-    public TournamentDelete(CLIApp cliApp){
-        this.cliApp = cliApp;
+    public TournamentDelete(SportManagementSystem sportManagementSystem){
+        this.sportManagementSystem = sportManagementSystem;
     }
 
     public Error execute(String[] arguments){
@@ -18,7 +18,7 @@ public class TournamentDelete implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            ExecutionController controller = new ExecutionController(this.cliApp);
+            ExecutionController controller = new ExecutionController(this.sportManagementSystem);
             error = controller.deleteTournament(arguments);
         }
         return error;

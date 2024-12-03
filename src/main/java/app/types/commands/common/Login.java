@@ -1,6 +1,6 @@
 package app.types.commands.common;
 
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
 import app.types.users.UserType;
@@ -8,10 +8,10 @@ import app.types.users.UserType;
 public class Login implements Command {
     private static final int NECESSARY_ARGUMENTS = 2;
 
-    private final CLIApp cliApp;
+    private final SportManagementSystem sportManagementSystem;
 
-    public Login(CLIApp cliApp){
-        this.cliApp = cliApp;
+    public Login(SportManagementSystem sportManagementSystem){
+        this.sportManagementSystem = sportManagementSystem;
     }
 
     public Error execute(String[] arguments) {
@@ -29,10 +29,10 @@ public class Login implements Command {
     private Error login(String[] arguments){
 
         Error error = Error.NULL;
-        if(this.cliApp.getCurrentUserType() != UserType.COMMON){
+        if(this.sportManagementSystem.getCurrentUserType() != UserType.COMMON){
             error = Error.USER_LOGGED_IN;
         } else {
-            error = this.cliApp.updateUser(arguments);
+            error = this.sportManagementSystem.updateUser(arguments);
         }
 
         return error;

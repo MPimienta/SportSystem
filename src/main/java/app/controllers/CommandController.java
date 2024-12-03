@@ -1,18 +1,18 @@
 package app.controllers;
 
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
 import app.types.users.User;
 
 public class CommandController extends Controller{
 
-    public CommandController(CLIApp cliApp){
-        super(cliApp);
+    public CommandController(SportManagementSystem sportManagementSystem){
+        super(sportManagementSystem);
     }
 
     public Error getCommandError(Command command){
-        User currentUser = this.cliApp.getCurrentUser();
+        User currentUser = this.sportManagementSystem.getCurrentUser();
         return currentUser.getCommandError(command);
     }
 
@@ -21,7 +21,7 @@ public class CommandController extends Controller{
     }
 
     public Command getCommand(String commandName){
-        User currentUser = this.cliApp.getCurrentUser();
+        User currentUser = this.sportManagementSystem.getCurrentUser();
         return currentUser.getCommand(commandName);
     }
 }

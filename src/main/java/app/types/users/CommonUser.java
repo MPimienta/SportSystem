@@ -1,6 +1,6 @@
 package app.types.users;
 
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
 import app.types.managers.CommandManager;
@@ -10,9 +10,9 @@ public class CommonUser implements User{
     private final UserType userType;
     private final CommandManager commandManager;
 
-    public CommonUser(CLIApp cliApp){
+    public CommonUser(SportManagementSystem sportManagementSystem){
         this.userType = UserType.COMMON;
-        this.commandManager = new CommonCommandManager(cliApp);
+        this.commandManager = new CommonCommandManager(sportManagementSystem);
     }
 
     public UserType getUserType(){

@@ -1,19 +1,19 @@
 package app;
 
 import app.controllers.CommandController;
-import app.models.CLIApp;
+import app.models.SportManagementSystem;
 import app.views.View;
 import app.views.console.ConsoleView;
 
-public class SportSystem {
-    private final CLIApp cliApp;
+public class CLIApp {
+    private final SportManagementSystem sportManagementSystem;
     private final View view;
     private final CommandController commandController;
 
 
-    private SportSystem(){
-        this.cliApp = new CLIApp();
-        this.commandController = new CommandController(this.cliApp);
+    private CLIApp(){
+        this.sportManagementSystem = new SportManagementSystem();
+        this.commandController = new CommandController(this.sportManagementSystem);
         this.view = new ConsoleView(this.commandController);
     }
 
@@ -24,6 +24,6 @@ public class SportSystem {
     }
 
     public static void main(String[] args) {
-        new SportSystem().play();
+        new CLIApp().play();
     }
 }

@@ -1,7 +1,6 @@
 package app.controllers;
 
-import app.models.CLIApp;
-import app.models.lists.elements.Element;
+import app.models.SportManagementSystem;
 import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
 import app.models.lists.elements.Tournament;
@@ -12,17 +11,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class ExecutionController extends Controller{
-    public ExecutionController(CLIApp cliApp) {
-        super(cliApp);
+    public ExecutionController(SportManagementSystem sportManagementSystem) {
+        super(sportManagementSystem);
     }
 
     public Error createPlayer(String[] arguments){
         Error error;
-        Admin admin = (Admin) this.cliApp.getCurrentUser();
+        Admin admin = (Admin) this.sportManagementSystem.getCurrentUser();
         SinglePlayer player = this.makePlayer(arguments, admin);
-        error = this.cliApp.createPlayer(player);
+        error = this.sportManagementSystem.createPlayer(player);
         if(!error.isNull()){
-            this.cliApp.createUser(player);
+            this.sportManagementSystem.createUser(player);
         }
         return error;
     }
@@ -33,26 +32,26 @@ public class ExecutionController extends Controller{
 
     public Error deletePlayer(String[] arguments){
         final int PLAYER_IDENTIFIER = 0;
-        return this.cliApp.deletePlayer(arguments[PLAYER_IDENTIFIER]);
+        return this.sportManagementSystem.deletePlayer(arguments[PLAYER_IDENTIFIER]);
     }
 
     public Error createTeam(String[] arguments){
         final int TEAM_NAME = 0;
         final int PLAYER_NAME = 1;
 
-        Admin admin = (Admin) this.cliApp.getCurrentUser();
+        Admin admin = (Admin) this.sportManagementSystem.getCurrentUser();
         SinglePlayer player = this.getPlayerByIdentifier(arguments[PLAYER_NAME]);
 
         if(player != null){
             Team team = this.makeTeam(arguments[TEAM_NAME], player, admin);
-            return this.cliApp.createTeam(team);
+            return this.sportManagementSystem.createTeam(team);
         } else {
             return Error.PLAYER_DOES_NOT_EXIST;
         }
     }
 
     private SinglePlayer getPlayerByIdentifier(String name){
-        return this.cliApp.getPlayerByIdentifier(name);
+        return this.sportManagementSystem.getPlayerByIdentifier(name);
     }
 
     private Team makeTeam(String name, SinglePlayer player, Admin admin){
@@ -61,7 +60,7 @@ public class ExecutionController extends Controller{
 
     public Error deleteTeam(String[] arguments){
         final int PLAYER_IDENTIFIER = 0;
-        return this.cliApp.deletePlayer(arguments[PLAYER_IDENTIFIER]);
+        return this.sportManagementSystem.deletePlayer(arguments[PLAYER_IDENTIFIER]);
     }
 
     public Error createTournament(String[] arguments){
@@ -70,11 +69,11 @@ public class ExecutionController extends Controller{
 
         Error error;
         try{
-            Admin admin = (Admin) this.cliApp.getCurrentUser();
+            Admin admin = (Admin) this.sportManagementSystem.getCurrentUser();
             String[] stringDates = new String[]{arguments[START_DATE], arguments[END_DATE]};
             LocalDate[] dates = this.makeDates(stringDates);
             Tournament tournament = this.makeTournament(arguments, dates);
-            error = this.cliApp.createTournament(tournament);
+            error = this.sportManagementSystem.createTournament(tournament);
         } catch(DateTimeParseException ex){
             error = Error.WRONG_DATE_FORMAT;
         }
@@ -95,7 +94,7 @@ public class ExecutionController extends Controller{
 
     public Error deleteTournament(String[] arguments){
         final int TOURNAMENT_IDENTIFIER = 0;
-        return this.cliApp.deleteTournament(arguments[TOURNAMENT_IDENTIFIER]);
+        return this.sportManagementSystem.deleteTournament(arguments[TOURNAMENT_IDENTIFIER]);
     }
 
     public Error teamAdd(String[] arguments){
@@ -106,14 +105,14 @@ public class ExecutionController extends Controller{
         Team team = this.getTeamByIdentifier(arguments[TEAM_NAME]);
 
         if(player != null && team != null){
-            return this.cliApp.teamAdd(team, player);
+            return this.sportManagementSystem.teamAdd(team, player);
         } else {
             return Error.PLAYER_DOES_NOT_EXIST;
         }
     }
 
     private Team getTeamByIdentifier(String name){
-        return this.cliApp.getTeamByIdentifier(name);
+        return this.sportManagementSystem.getTeamByIdentifier(name);
     }
 
     public Error teamRemove(String[] arguments){
@@ -123,7 +122,7 @@ public class ExecutionController extends Controller{
         Team team = this.getTeamByIdentifier(arguments[TEAM_NAME]);
 
         if(team != null){
-            return this.cliApp.teamRemove(team, arguments[PLAYER_NAME]);
+            return this.sportManagementSystem.teamRemove(team, arguments[PLAYER_NAME]);
         } else {
             return Error.PLAYER_DOES_NOT_EXIST;
         }
@@ -138,9 +137,9 @@ public class ExecutionController extends Controller{
         Tournament tournament = this.getTournamentByIdentifier(arguments[TOURNAMENT_NAME]);
         if(tournament != null){
             if(arguments[MATCHMAKING].equals("-a")){
-                error = this.cliApp.randomMatchmake(tournament);
+                error = this.sportManagementSystem.randomMatchmake(tournament);
             } else if(arguments[MATCHMAKING].equals("-m")){
-                error = this.cliApp.manualMatchmake(tournament);
+                error = this.sportManagementSystem.manualMatchmake(tournament);
             }
         } else {
             error = Error.PLAYER_DOES_NOT_EXIST;
@@ -150,7 +149,7 @@ public class ExecutionController extends Controller{
     }
 
     private Tournament getTournamentByIdentifier(String name){
-        return this.cliApp.getTournamentByIdentifier(name);
+        return this.sportManagementSystem.getTournamentByIdentifier(name);
     }
 
 

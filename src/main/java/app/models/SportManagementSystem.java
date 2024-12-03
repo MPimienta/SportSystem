@@ -4,7 +4,6 @@ import app.models.lists.ListOfElements;
 import app.models.lists.PlayerList;
 import app.models.lists.TournamentList;
 import app.models.lists.UserList;
-import app.models.lists.elements.Element;
 import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
 import app.models.lists.elements.Tournament;
@@ -14,7 +13,7 @@ import app.types.users.User;
 import app.types.Error;
 import app.types.users.UserType;
 
-public class CLIApp {
+public class SportManagementSystem {
     private static int IDENTIFIER = 0;
 
     private static int PLAYER_LIST = 0;
@@ -25,7 +24,7 @@ public class CLIApp {
     private ListOfElements[] lists;
     private User currentUser;
 
-    public CLIApp(){
+    public SportManagementSystem(){
         this.lists = new ListOfElements[]{
                 new PlayerList(),
                 new UserList(),
@@ -118,7 +117,7 @@ public class CLIApp {
     }
 
     public Error randomMatchmake(Tournament tournament){
-
+        return tournament.randomMatchmake();
     }
 
 }
