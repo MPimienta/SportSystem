@@ -17,6 +17,7 @@ public class AdminCommandManager extends CommandManager{
         this.getCommandList().put("tournament_create",new TournamentCreate(sportManagementSystem));
         this.getCommandList().put("tournament_delete",new TournamentDelete(sportManagementSystem));
         this.getCommandList().put("tournament_matchmaking",new TournamentMatchmaking(sportManagementSystem));
+        this.getCommandList().put("tournament_list",new AdminTournamentList(sportManagementSystem));
     }
 
     public void putCommands(){

@@ -4,10 +4,10 @@ import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
 
-public class StatisticsShow implements Command {
+public class TournamentRemove implements Command {
     private final SportManagementSystem sportManagementSystem;
 
-    public StatisticsShow(SportManagementSystem sportManagementSystem){
+    public TournamentRemove(SportManagementSystem sportManagementSystem){
         this.sportManagementSystem = sportManagementSystem;
     }
 

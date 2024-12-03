@@ -2,7 +2,7 @@ package app.models;
 
 import app.models.lists.ListOfElements;
 import app.models.lists.PlayerList;
-import app.models.lists.TournamentList;
+import app.models.lists.TournamentsList;
 import app.models.lists.UserList;
 import app.models.lists.elements.Player;
 import app.models.lists.elements.SinglePlayer;
@@ -30,7 +30,7 @@ public class SportManagementSystem {
                 new PlayerList(),
                 new UserList(),
                 new PlayerList(),
-                new TournamentList()
+                new TournamentsList()
         };
         this.currentUser = new CommonUser(this);
         this.createUser(new Admin("sudo", "sudopassword",this));
