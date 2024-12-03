@@ -106,8 +106,12 @@ public class SportManagementSystem {
     }
 
     public Error deleteTeam(String team){
-        return lists[TEAM_LIST].removeElement(team);
-        //Todo: Search in every tournament list for the team to remove
+        if(!this.isInOngoingTournament(team)){
+            this.deletePlayerInTournaments(team);
+            return lists[TEAM_LIST].removeElement(team);
+        } else {
+            return Error.PLAYER_IN_ONGOING_TOURNAMENT;
+        }
     }
 
     public Error deleteTournament(String tournament){
