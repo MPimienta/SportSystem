@@ -21,4 +21,16 @@ public class Team extends Player{
     public Error removePlayer(String player){
         return this.players.removeElement(player);
     }
+
+    public int getSize(){
+        return this.players.getSize();
+    }
+
+    public boolean hasPlayer(String player){
+        if(this.players.getElementByIdentifier(player) != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

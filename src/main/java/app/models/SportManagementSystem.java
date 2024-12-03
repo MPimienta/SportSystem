@@ -1,9 +1,6 @@
 package app.models;
 
-import app.models.lists.ListOfElements;
-import app.models.lists.PlayerList;
-import app.models.lists.TournamentsList;
-import app.models.lists.UserList;
+import app.models.lists.*;
 import app.models.lists.elements.Player;
 import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
@@ -13,6 +10,8 @@ import app.types.users.CommonUser;
 import app.types.users.User;
 import app.types.Error;
 import app.types.users.UserType;
+
+import java.util.LinkedList;
 
 public class SportManagementSystem {
     private static int IDENTIFIER = 0;
@@ -29,7 +28,7 @@ public class SportManagementSystem {
         this.lists = new ListOfElements[]{
                 new PlayerList(),
                 new UserList(),
-                new PlayerList(),
+                new TeamList(),
                 new TournamentsList()
         };
         this.currentUser = new CommonUser(this);
@@ -56,8 +55,27 @@ public class SportManagementSystem {
         if(error.isNull()){
             lists[USER_LIST].removeElement(player);
             //Todo: Search in every team list for the player to remove
+            this.deletePlayerInTeams(player);
         }
         return error;
+    }
+
+    private boolean isInOngoingTournament(String identifier){
+
+    }
+
+    private LinkedList<Team> getPlayerTeams(String player){
+        TeamList teamList = (TeamList) this.lists[TEAM_LIST];
+        return teamList.getPlayerTeams(player);
+    }
+
+    private void deletePlayerInTeams(String player){
+        TeamList teamList = (TeamList) this.lists[TEAM_LIST];
+        teamList.deletePlayer(player);
+    }
+
+    private boolean isPlayerInTournament(String identifier){
+        if
     }
 
     public Error deleteTeam(String team){
@@ -106,7 +124,12 @@ public class SportManagementSystem {
     }
 
     public Error teamRemove(Team team, String player){
-        return team.removePlayer(player);
+        Error error = team.removePlayer(player);
+        if(team.getSize() < 2){
+            this.lists[TEAM_LIST].removeElement(team.getIdentifier());
+        }
+        return error;
+
     }
 
     public Tournament getTournamentByIdentifier(String tournament){
