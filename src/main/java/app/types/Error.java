@@ -16,6 +16,7 @@ public enum Error {
     PLAYER_IN_ONGOING_TOURNAMENT,
     ONGOING_TOURNAMENT,
     PLAYER_NOT_IN_TEAM,
+    UNKNOWN_FORMAT,
     NULL;
 
     public boolean isNull() {

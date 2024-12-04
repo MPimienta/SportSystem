@@ -3,6 +3,12 @@ package app.models.lists.elements;
 import app.types.users.Admin;
 
 public abstract class Player implements Element{
+    private static final int SCORE = 0;
+    private static final int MATCHES_WON = 1;
+    private static final int ASSISTANCE_SCORE = 2;
+    private static final int TOURNAMENTS_WON = 3;
+    private static final int MONEY = 4;
+
     private final String identifier;
     private final Admin creator;
     private final double[] statistics;
@@ -19,6 +25,22 @@ public abstract class Player implements Element{
 
     public Admin getCreator(){
         return this.creator;
+    }
+
+    protected double getScore(){
+        return this.statistics[SCORE];
+    }
+    protected double getMatchesWon(){
+        return this.statistics[MATCHES_WON];
+    }
+    protected double getAssistanceScore(){
+        return this.statistics[ASSISTANCE_SCORE];
+    }
+    protected double getTournamentsWon(){
+        return this.statistics[TOURNAMENTS_WON];
+    }
+    protected double getMoney(){
+        return this.statistics[MONEY];
     }
 
 }

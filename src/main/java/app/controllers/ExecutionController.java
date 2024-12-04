@@ -13,6 +13,7 @@ public class ExecutionController extends Controller{
     private final AddController addController;
     private final RemoveController removeController;
     private final MatchmakingController matchmakingController;
+    private final ShowController showController;
 
     public ExecutionController(SportManagementSystem sportManagementSystem) {
         super(sportManagementSystem);
@@ -20,6 +21,7 @@ public class ExecutionController extends Controller{
         this.deleteController = new DeleteController(sportManagementSystem);
         this.addController = new AddController(sportManagementSystem);
         this.removeController = new RemoveController(sportManagementSystem);
+        this.showController = new ShowController(sportManagementSystem);
         this.matchmakingController = new MatchmakingController(sportManagementSystem);
     }
 
@@ -81,6 +83,19 @@ public class ExecutionController extends Controller{
 
     public Error tournamentRemoveTeam(String[] arguments){
         return this.removeController.tournamentRemoveTeam(arguments);
+    }
+
+    public Error showStatistics(String[] arguments){
+        Error error = Error.NULL;
+        if(arguments[0].equals("-csv")){
+            this.showController.showStatisticsCsv();
+        } else if(arguments[0].equals("-json")){
+            this.showController.showStatisticsJson();
+        } else {
+            error = Error.UNKNOWN_FORMAT;
+        }
+
+        return error;
     }
 
 }

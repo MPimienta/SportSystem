@@ -22,14 +22,14 @@ public class CreateController {
         Admin admin = (Admin) this.sportManagementSystem.getCurrentUser();
         SinglePlayer player = this.makePlayer(arguments, admin);
         error = this.sportManagementSystem.createPlayer(player);
-        if(!error.isNull()){
+        if(error.isNull()){
             this.sportManagementSystem.createUser(player);
         }
         return error;
     }
 
     private SinglePlayer makePlayer(String[] arguments, Admin admin){
-        return new SinglePlayer(arguments, admin);
+        return new SinglePlayer(arguments, admin, this.sportManagementSystem);
     }
 
     public Error createTeam(String[] arguments){
