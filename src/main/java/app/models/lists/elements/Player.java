@@ -43,4 +43,8 @@ public abstract class Player implements Element{
         return this.statistics[MONEY];
     }
 
+    public String toString(){
+        return "name: " + this.getIdentifier() + ", score: " + this.getScore();
+    }
+
 }

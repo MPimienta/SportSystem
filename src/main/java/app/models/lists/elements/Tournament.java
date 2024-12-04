@@ -79,4 +79,9 @@ public class Tournament implements Element {
             return false;
         }
     }
+
+    public String toString(){
+        return "Tournament: " + this.name + "\n" + this.playerList.toString() + "\n";
+
+    }
 }

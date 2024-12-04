@@ -98,4 +98,16 @@ public class ExecutionController extends Controller{
         return error;
     }
 
+    public void adminTournamentList(){
+
+    }
+
+    public void playerTournamentList(){
+
+    }
+
+    public void commonTournamentList(){
+        this.sportManagementSystem.showTournamentList();
+    }
+
 }

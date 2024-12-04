@@ -8,6 +8,7 @@ import app.types.users.CommonUser;
 import app.types.users.User;
 import app.types.Error;
 import app.types.users.UserType;
+import app.views.console.PlayersView;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -123,5 +124,9 @@ public class SportManagementSystem {
 
     public Error tournamentRemovePlayer(Player player, Tournament tournament){
         return this.deleter.tournamentRemovePlayer(player, tournament);
+    }
+
+    public void showTournamentList(){
+        new PlayersView().showTournamentList((TournamentsList) this.lists[TOURNAMENT_LIST]);
     }
 }

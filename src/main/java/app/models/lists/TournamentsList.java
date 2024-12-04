@@ -33,4 +33,13 @@ public class TournamentsList extends ListOfElements{
             tournament.removePlayer(identifier);
         }
     }
+
+    public String toString(){
+        String result = "";
+        for(Element tournament : this.getList()){
+            result = result + tournament.toString() + "\n";
+        }
+
+        return result;
+    }
 }
