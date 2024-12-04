@@ -3,6 +3,7 @@ package app.models;
 import app.models.lists.ListOfElements;
 import app.models.lists.TeamList;
 import app.models.lists.TournamentsList;
+import app.models.lists.elements.Player;
 import app.models.lists.elements.Team;
 import app.models.lists.elements.Tournament;
 import app.types.Error;
@@ -91,6 +92,22 @@ public class Deleter {
 
     public Error deleteTournament(String tournament){
         return lists[TOURNAMENT_LIST].removeElement(tournament);
+    }
+
+    public Error tournamentRemovePlayer(Player player, Tournament tournament){
+        if (!tournament.isOngoing()){
+            return tournament.removePlayer(player.getIdentifier());
+        } else {
+            return Error.ONGOING_TOURNAMENT;
+        }
+    }
+
+    public Error teamRemove(Team team, String player){
+        Error error = team.removePlayer(player);
+        if(team.getSize() < 2){
+            this.lists[TEAM_LIST].removeElement(team.getIdentifier());
+        }
+        return error;
     }
 
 }

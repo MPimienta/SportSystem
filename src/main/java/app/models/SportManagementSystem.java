@@ -75,7 +75,6 @@ public class SportManagementSystem {
             error = Error.USER_DOES_NOT_EXIST;
         }
         return error;
-
     }
 
     public void logout(){
@@ -98,21 +97,16 @@ public class SportManagementSystem {
         return (Team) this.lists[TEAM_LIST].getElementByIdentifier(name);
     }
 
+    public Tournament getTournamentByIdentifier(String tournament){
+        return (Tournament) this.lists[TOURNAMENT_LIST].getElementByIdentifier(tournament);
+    }
+
     public Error teamAdd(Team team, SinglePlayer player){
-        return team.addPlayer(player);
+        return this.creator.teamAdd(team, player);
     }
 
     public Error teamRemove(Team team, String player){
-        Error error = team.removePlayer(player);
-        if(team.getSize() < 2){
-            this.lists[TEAM_LIST].removeElement(team.getIdentifier());
-        }
-        return error;
-
-    }
-
-    public Tournament getTournamentByIdentifier(String tournament){
-        return (Tournament) this.lists[TOURNAMENT_LIST].getElementByIdentifier(tournament);
+        return this.deleter.teamRemove(team, player);
     }
 
     public Error manualMatchmake(Tournament tournament, Player[] players){
@@ -124,18 +118,10 @@ public class SportManagementSystem {
     }
 
     public Error tournamentAddPlayer(Player player, Tournament tournament){
-        if (!tournament.isOngoing()){
-            return tournament.addPlayer(player);
-        } else {
-            return Error.ONGOING_TOURNAMENT;
-        }
+        return this.creator.tournamentAddPlayer(player, tournament);
     }
 
     public Error tournamentRemovePlayer(Player player, Tournament tournament){
-        if (!tournament.isOngoing()){
-            return tournament.removePlayer(player.getIdentifier());
-        } else {
-            return Error.ONGOING_TOURNAMENT;
-        }
+        return this.deleter.tournamentRemovePlayer(player, tournament);
     }
 }

@@ -1,6 +1,7 @@
 package app.models;
 
 import app.models.lists.ListOfElements;
+import app.models.lists.elements.Player;
 import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
 import app.models.lists.elements.Tournament;
@@ -35,5 +36,17 @@ public class Creator {
 
     public Error createTournament(Tournament tournament){
         return lists[TOURNAMENT_LIST].addElement(tournament);
+    }
+
+    public Error teamAdd(Team team, SinglePlayer player){
+        return team.addPlayer(player);
+    }
+
+    public Error tournamentAddPlayer(Player player, Tournament tournament){
+        if (!tournament.isOngoing()){
+            return tournament.addPlayer(player);
+        } else {
+            return Error.ONGOING_TOURNAMENT;
+        }
     }
 }
