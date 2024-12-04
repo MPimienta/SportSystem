@@ -14,6 +14,8 @@ public enum Error {
     WRONG_DATE_FORMAT,
     UNEVEN_AMOUNT_OF_PLAYERS,
     PLAYER_IN_ONGOING_TOURNAMENT,
+    ONGOING_TOURNAMENT,
+    PLAYER_NOT_IN_TEAM,
     NULL;
 
     public boolean isNull() {

@@ -1,7 +1,9 @@
 package app.controllers;
 
 import app.models.SportManagementSystem;
+import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
+import app.models.lists.elements.Tournament;
 import app.types.Error;
 
 public class RemoveController {
@@ -25,11 +27,39 @@ public class RemoveController {
     }
 
     public Error tournamentRemovePlayer(String[] arguments){
+        final int TOURNAMENT = 0;
 
+        Error error;
+        SinglePlayer currentPlayer = (SinglePlayer) this.sportManagementSystem.getCurrentUser();
+        Tournament tournament = this.sportManagementSystem.getTournamentByIdentifier(arguments[TOURNAMENT]);
+
+        if (tournament == null) {
+            error = Error.ELEMENT_DOES_NOT_EXIST;
+        } else {
+            error = this.sportManagementSystem.tournamentRemovePlayer(currentPlayer, tournament);
+        }
+        return error;
     }
 
     public Error tournamentRemoveTeam(String[] arguments){
+        final int TOURNAMENT = 0;
+        final int TEAM = 1;
 
+        Error error;
+        SinglePlayer currentPlayer = (SinglePlayer) this.sportManagementSystem.getCurrentUser();
+        Tournament tournament = this.sportManagementSystem.getTournamentByIdentifier(arguments[TOURNAMENT]);
+        Team team = this.sportManagementSystem.getTeamByIdentifier(arguments[TEAM]);
+
+        if (team == null || tournament == null) {
+            error = Error.ELEMENT_DOES_NOT_EXIST;
+        } else {
+            if(team.hasPlayer(currentPlayer.getIdentifier())){
+                error = Error.PLAYER_NOT_IN_TEAM;
+            } else {
+                error = this.sportManagementSystem.tournamentRemovePlayer(team, tournament);
+            }
+        }
+        return error;
     }
 
 

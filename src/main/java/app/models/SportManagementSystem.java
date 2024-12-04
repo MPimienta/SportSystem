@@ -175,4 +175,19 @@ public class SportManagementSystem {
         return tournament.randomMatchmake();
     }
 
+    public Error tournamentAddPlayer(Player player, Tournament tournament){
+        if (!tournament.isOngoing()){
+            return tournament.addPlayer(player);
+        } else {
+            return Error.ONGOING_TOURNAMENT;
+        }
+    }
+
+    public Error tournamentRemovePlayer(Player player, Tournament tournament){
+        if (!tournament.isOngoing()){
+            return tournament.removePlayer(player.getIdentifier());
+        } else {
+            return Error.ONGOING_TOURNAMENT;
+        }
+    }
 }

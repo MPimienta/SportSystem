@@ -16,6 +16,8 @@ public abstract class ErrorView {
             "\tWrong date format",
             "\tUneven amount of players",
             "\tPlayer is currently in an ongoing tournament",
+            "\tThis tournament is already ongoing",
+            "\tCurrent player is not in specified team"
     };
 
     public abstract void writeln(Error error);
