@@ -80,6 +80,15 @@ public class Tournament implements Element {
         }
     }
 
+    public boolean hasEnded(){
+        LocalDate currentDate = LocalDate.now();
+        if(currentDate.isAfter(this.dates[END_DATE])){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public String toString(){
         return "Tournament: " + this.name + "\n" + this.playerList.toString() + "\n";
 

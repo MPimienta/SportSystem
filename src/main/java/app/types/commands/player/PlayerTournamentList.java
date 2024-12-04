@@ -1,5 +1,6 @@
 package app.types.commands.player;
 
+import app.controllers.ExecutionController;
 import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
@@ -12,6 +13,8 @@ public class PlayerTournamentList implements Command {
         this.sportManagementSystem = sportManagementSystem;
     }
     public Error execute(String[] arguments) {
-        return null;
+        ExecutionController executionController = new ExecutionController(sportManagementSystem);
+        executionController.playerTournamentList();
+        return Error.NULL;
     }
 }

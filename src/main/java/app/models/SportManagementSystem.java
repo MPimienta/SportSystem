@@ -132,5 +132,14 @@ public class SportManagementSystem {
         new PlayersView().showTournamentList((TournamentsList) this.lists[TOURNAMENT_LIST]);
     }
 
+    public void showTournamentListRanked(){
+
+    }
+
+    public void deletePastTournaments(){
+        TournamentsList tournamentsList = (TournamentsList) this.lists[TOURNAMENT_LIST];
+        tournamentsList.deletePastTournaments();
+    }
+
 
 }

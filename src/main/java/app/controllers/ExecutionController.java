@@ -99,11 +99,13 @@ public class ExecutionController extends Controller{
     }
 
     public void adminTournamentList(){
+        this.sportManagementSystem.deletePastTournaments();
+        this.sportManagementSystem.showTournamentListRanked();
 
     }
 
     public void playerTournamentList(){
-
+        this.sportManagementSystem.showTournamentListRanked();
     }
 
     public void commonTournamentList(){

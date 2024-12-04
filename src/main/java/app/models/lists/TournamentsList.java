@@ -42,4 +42,13 @@ public class TournamentsList extends ListOfElements{
 
         return result;
     }
+
+    public void deletePastTournaments(){
+        for(Element element : this.getList()){
+            Tournament tournament = (Tournament) element;
+            if(tournament.hasEnded()){
+                this.removeElement(tournament.getIdentifier());
+            }
+        }
+    }
 }
