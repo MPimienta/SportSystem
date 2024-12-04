@@ -38,6 +38,8 @@ public class SportManagementSystem {
 
         this.currentUser = new CommonUser(this);
         this.createUser(new Admin("sudo", "sudopassword",this));
+
+
     }
     public Error createUser(User user){
         return this.creator.createUser(user);
@@ -129,4 +131,6 @@ public class SportManagementSystem {
     public void showTournamentList(){
         new PlayersView().showTournamentList((TournamentsList) this.lists[TOURNAMENT_LIST]);
     }
+
+
 }

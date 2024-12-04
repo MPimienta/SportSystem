@@ -15,4 +15,8 @@ public class ConsoleView extends View {
         this.commandView.interact();
     }
 
+    public void test(){
+        this.commandView.test();
+    }
+
 }

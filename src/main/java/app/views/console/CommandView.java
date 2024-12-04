@@ -59,4 +59,24 @@ public class CommandView {
             return "";
         }
     }
+
+    public void test(){
+        String[] input = new String[]{"login", "sudo;asd"};
+        this.test(input);
+        input = new String[]{"player_create", "arrobapaco;asd;paco;jones"};
+        this.test(input);
+        input  = new String[]{"player_create", "arrobajuana;asd;juana;juanita"};
+        this.test(input);
+        input  = new String[]{"player_create", "arrobajuana;asd;juana;juanita"};
+        this.test(input);
+    }
+
+    private void test(String[] input){
+        Command command = this.getCommand(input);
+        String arguments = this.getArguments(input);
+        Error error = this.getCommandError(command);
+        if (error.isNull()){
+            this.execute(command, arguments);
+        }
+    }
 }

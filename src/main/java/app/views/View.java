@@ -10,4 +10,5 @@ public abstract class View {
     }
 
     public abstract void read();
+    public abstract void test();
 }

@@ -46,6 +46,6 @@ public class CommonUser implements User{
 
     @Override
     public String getIdentifier() {
-        return null;
+        return "";
     }
 }
