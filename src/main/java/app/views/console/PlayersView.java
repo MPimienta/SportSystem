@@ -25,4 +25,9 @@ public class PlayersView {
         new MessageView().writeln((Message.TOURNAMENT_LIST));
         Console.getInstance().writeln(tournamentsList.toString());
     }
+
+    public void showTournamentListRanked(String tournamentList){
+        new MessageView().writeln((Message.TOURNAMENT_LIST));
+        Console.getInstance().writeln(tournamentList);
+    }
 }

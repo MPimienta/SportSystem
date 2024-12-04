@@ -51,4 +51,13 @@ public class TournamentsList extends ListOfElements{
             }
         }
     }
+
+    public String rankedToString(){
+        String result = "";
+        for(Element element : this.getList()){
+            Tournament tournament = (Tournament) element;
+            result = result + tournament.rankedToString() + "\n";
+        }
+        return result;
+    }
 }

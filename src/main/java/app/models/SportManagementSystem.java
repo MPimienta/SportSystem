@@ -133,7 +133,8 @@ public class SportManagementSystem {
     }
 
     public void showTournamentListRanked(){
-
+        TournamentsList tournamentsList = (TournamentsList) this.lists[TOURNAMENT_LIST];
+        new PlayersView().showTournamentListRanked(tournamentsList.rankedToString());
     }
 
     public void deletePastTournaments(){

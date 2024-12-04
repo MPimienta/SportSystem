@@ -90,7 +90,38 @@ public class Tournament implements Element {
     }
 
     public String toString(){
-        return "Tournament: " + this.name + "\n" + this.playerList.toString() + "\n";
+        return "Tournament: " + this.name + "\n" + (this.playerList).toString() + "\n";
+    }
 
+    public String rankedToString(){
+        Player[] ranking = this.rankPlayers();
+        String result = "Tournament: " + this.name + "\n";
+        for (int i = 0; i < this.playerList.getSize(); i++) {
+            result = result + ranking[i].toString() + "\n";
+        }
+        return result;
+    }
+
+    private Player[] rankPlayers(){
+        Player[] ranking = new Player[this.playerList.getSize()];
+        for (int i = 0; i < this.playerList.getSize(); i++) {
+            ranking[i] = (Player) this.playerList.getElement(i);
+        }
+
+        this.sort(ranking);
+
+        return ranking;
+    }
+
+    private void sort(Player[] ranking){
+        for (int i=1; i < ranking.length; i++) {
+            Player aux = ranking[i];
+            int j = i;
+            while (j > 0 && ranking[j-1].getScore() < aux.getScore()){
+                ranking[j] = ranking[j-1];
+                j--;
+            }
+            ranking[j]=aux;
+        }
     }
 }
