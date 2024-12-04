@@ -6,110 +6,51 @@ import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
 import app.models.lists.elements.Tournament;
 import app.types.Error;
-import app.types.users.Admin;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class ExecutionController extends Controller{
+    private final CreateController createController;
+    private final DeleteController deleteController;
+    private final AddController addController;
+    private final RemoveController removeController;
+
     public ExecutionController(SportManagementSystem sportManagementSystem) {
         super(sportManagementSystem);
+        this.createController = new CreateController(sportManagementSystem);
+        this.deleteController = new DeleteController(sportManagementSystem);
+        this.addController = new AddController(sportManagementSystem);
+        this.removeController = new RemoveController(sportManagementSystem);
     }
 
     public Error createPlayer(String[] arguments){
-        Error error;
-        Admin admin = (Admin) this.sportManagementSystem.getCurrentUser();
-        SinglePlayer player = this.makePlayer(arguments, admin);
-        error = this.sportManagementSystem.createPlayer(player);
-        if(!error.isNull()){
-            this.sportManagementSystem.createUser(player);
-        }
-        return error;
-    }
-
-    private SinglePlayer makePlayer(String[] arguments, Admin admin){
-        return new SinglePlayer(arguments, admin);
+        return this.createController.createPlayer(arguments);
     }
 
     public Error deletePlayer(String[] arguments){
-        final int PLAYER_IDENTIFIER = 0;
-        return this.sportManagementSystem.deletePlayer(arguments[PLAYER_IDENTIFIER]);
+        return this.deleteController.deletePlayer(arguments);
     }
 
     public Error createTeam(String[] arguments){
-        final int TEAM_NAME = 0;
-        final int PLAYER_NAME = 1;
-
-        Admin admin = (Admin) this.sportManagementSystem.getCurrentUser();
-        SinglePlayer player = this.getPlayerByIdentifier(arguments[PLAYER_NAME]);
-
-        if(player != null){
-            Team team = this.makeTeam(arguments[TEAM_NAME], player, admin);
-            return this.sportManagementSystem.createTeam(team);
-        } else {
-            return Error.ELEMENT_DOES_NOT_EXIST;
-        }
+        return this.createController.createTeam(arguments);
     }
 
     private SinglePlayer getPlayerByIdentifier(String name){
         return this.sportManagementSystem.getPlayerByIdentifier(name);
     }
 
-    private Team makeTeam(String name, SinglePlayer player, Admin admin){
-        return new Team(name, player, admin);
-    }
-
     public Error deleteTeam(String[] arguments){
-        final int PLAYER_IDENTIFIER = 0;
-        return this.sportManagementSystem.deletePlayer(arguments[PLAYER_IDENTIFIER]);
+        return this.deleteController.deleteTeam(arguments);
     }
 
     public Error createTournament(String[] arguments){
-        final int START_DATE = 3;
-        final int END_DATE = 4;
-
-        Error error;
-        try{
-            Admin admin = (Admin) this.sportManagementSystem.getCurrentUser();
-            String[] stringDates = new String[]{arguments[START_DATE], arguments[END_DATE]};
-            LocalDate[] dates = this.makeDates(stringDates);
-            Tournament tournament = this.makeTournament(arguments, dates);
-            error = this.sportManagementSystem.createTournament(tournament);
-        } catch(DateTimeParseException ex){
-            error = Error.WRONG_DATE_FORMAT;
-        }
-        return error;
-    }
-
-    private LocalDate[] makeDates(String[] arguments){
-        LocalDate[] dates = new LocalDate[2];
-        for (int i = 0; i < 2; i++) {
-            dates[i] = LocalDate.parse(arguments[i]);
-        }
-        return dates;
-    }
-
-    private Tournament makeTournament(String[] arguments, LocalDate[] dates){
-        return new Tournament(arguments, dates);
+        return this.createController.createTournament(arguments);
     }
 
     public Error deleteTournament(String[] arguments){
-        final int TOURNAMENT_IDENTIFIER = 0;
-        return this.sportManagementSystem.deleteTournament(arguments[TOURNAMENT_IDENTIFIER]);
+        return this.deleteController.deleteTournament(arguments);
     }
 
     public Error teamAdd(String[] arguments){
-        final int TEAM_NAME = 0;
-        final int PLAYER_NAME = 1;
-
-        SinglePlayer player = this.getPlayerByIdentifier(arguments[PLAYER_NAME]);
-        Team team = this.getTeamByIdentifier(arguments[TEAM_NAME]);
-
-        if(player != null && team != null){
-            return this.sportManagementSystem.teamAdd(team, player);
-        } else {
-            return Error.ELEMENT_DOES_NOT_EXIST;
-        }
+        return this.addController.teamAdd(arguments);
     }
 
     private Team getTeamByIdentifier(String name){
@@ -117,16 +58,7 @@ public class ExecutionController extends Controller{
     }
 
     public Error teamRemove(String[] arguments){
-        final int TEAM_NAME = 0;
-        final int PLAYER_NAME = 1;
-
-        Team team = this.getTeamByIdentifier(arguments[TEAM_NAME]);
-
-        if(team != null){
-            return this.sportManagementSystem.teamRemove(team, arguments[PLAYER_NAME]);
-        } else {
-            return Error.ELEMENT_DOES_NOT_EXIST;
-        }
+        return this.removeController.teamRemove(arguments);
     }
 
     public Error tournamentMatchmaking(String[] arguments){
@@ -173,11 +105,24 @@ public class ExecutionController extends Controller{
         return players;
     }
 
-
-
     private Tournament getTournamentByIdentifier(String name){
         return this.sportManagementSystem.getTournamentByIdentifier(name);
     }
 
+    public Error tournamentAddPlayer(String[] arguments){
+        return this.addController.tournamentAddPlayer(arguments);
+    }
+
+    public Error tournamentAddTeam(String[] arguments){
+        return this.addController.tournamentAddTeam(arguments);
+    }
+
+    public Error tournamentRemovePlayer(String[] arguments){
+        return this.removeController.tournamentRemovePlayer(arguments);
+    }
+
+    public Error tournamentRemoveTeam(String[] arguments){
+        return this.removeController.tournamentRemoveTeam(arguments);
+    }
 
 }
