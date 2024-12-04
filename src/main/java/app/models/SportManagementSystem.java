@@ -22,6 +22,8 @@ public class SportManagementSystem {
 
     private ListOfElements[] lists;
     private User currentUser;
+    private final Creator creator;
+    private final Deleter deleter;
 
     public SportManagementSystem(){
         this.lists = new ListOfElements[]{
@@ -30,92 +32,38 @@ public class SportManagementSystem {
                 new TeamList(),
                 new TournamentsList()
         };
+        this.creator = new Creator(this.lists);
+        this.deleter = new Deleter(this.lists);
+
         this.currentUser = new CommonUser(this);
         this.createUser(new Admin("sudo", "sudopassword",this));
     }
     public Error createUser(User user){
-        return lists[USER_LIST].addElement(user);
+        return this.creator.createUser(user);
     }
 
     public Error createPlayer(SinglePlayer player){
-        return this.lists[PLAYER_LIST].addElement(player);
+        return this.creator.createPlayer(player);
     }
 
     public Error createTeam(Team team){
-        return this.lists[TEAM_LIST].addElement(team);
+        return this.creator.createTeam(team);
     }
 
     public Error createTournament(Tournament tournament){
-        return lists[TOURNAMENT_LIST].addElement(tournament);
+        return this.creator.createTournament(tournament);
     }
 
     public Error deletePlayer(String player){
-        Error error;
-        if(!this.isInOngoingTournament(player)){
-            this.deletePlayerInTeams(player);
-            this.deletePlayerInTournaments(player);
-            error = lists[PLAYER_LIST].removeElement(player);
-            if(error.isNull()){
-                lists[USER_LIST].removeElement(player);
-            }
-        } else {
-            error = Error.PLAYER_IN_ONGOING_TOURNAMENT;
-        }
-
-        return error;
-    }
-
-    private boolean isInOngoingTournament(String identifier){
-        LinkedList<Tournament> tournaments = this.getPlayerTournaments(identifier);
-        Iterator<Tournament> iterator = tournaments.iterator();
-        boolean isInOngoing = false;
-        while(iterator.hasNext() && !isInOngoing){
-            Tournament tournament = iterator.next();
-            if(tournament.isOngoing()){
-                isInOngoing = true;
-            }
-        }
-        return isInOngoing;
-    }
-
-    private LinkedList<Tournament> getPlayerTournaments(String identifier){
-        TournamentsList tournamentsList = (TournamentsList) this.lists[TOURNAMENT_LIST];
-        return tournamentsList.getPlayerTournaments(identifier);
-    }
-
-    private LinkedList<Team> getPlayerTeams(String player){
-        TeamList teamList = (TeamList) this.lists[TEAM_LIST];
-        return teamList.getPlayerTeams(player);
-    }
-
-    private void deletePlayerInTeams(String identifier){
-        LinkedList<Team> teams = this.getPlayerTeams(identifier);
-        Iterator<Team> iterator = teams.iterator();
-
-        while(iterator.hasNext()){
-            Team team = iterator.next();
-            if(this.isInOngoingTournament(team.getIdentifier())){
-                team.removePlayer(identifier);
-            }
-        }
-    }
-
-    private void deletePlayerInTournaments(String identifier){
-        TournamentsList tournamentList = (TournamentsList) this.lists[TOURNAMENT_LIST];
-        tournamentList.deletePlayer(identifier);
+        return this.deleter.deletePlayer(player);
     }
 
     public Error deleteTeam(String team){
-        if(!this.isInOngoingTournament(team)){
-            this.deletePlayerInTournaments(team);
-            return lists[TEAM_LIST].removeElement(team);
-        } else {
-            return Error.PLAYER_IN_ONGOING_TOURNAMENT;
-        }
+        return this.deleter.deleteTeam(team);
     }
 
     public Error deleteTournament(String tournament){
-        return lists[TOURNAMENT_LIST].removeElement(tournament);
+        return this.deleter.deleteTournament(tournament);
     }
 
     public Error updateUser(String[] arguments){

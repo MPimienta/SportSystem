@@ -1,0 +1,39 @@
+package app.models;
+
+import app.models.lists.ListOfElements;
+import app.models.lists.elements.SinglePlayer;
+import app.models.lists.elements.Team;
+import app.models.lists.elements.Tournament;
+import app.types.Error;
+import app.types.users.User;
+
+public class Creator {
+    private static final int IDENTIFIER = 0;
+
+    private static final int PLAYER_LIST = 0;
+    private static final int USER_LIST = 1;
+    private static final int TEAM_LIST = 2;
+    private static final int TOURNAMENT_LIST = 3;
+
+    private final ListOfElements[] lists;
+
+    public Creator(ListOfElements[] lists){
+        this.lists = lists;
+    }
+
+    public Error createUser(User user){
+        return lists[USER_LIST].addElement(user);
+    }
+
+    public Error createPlayer(SinglePlayer player){
+        return this.lists[PLAYER_LIST].addElement(player);
+    }
+
+    public Error createTeam(Team team){
+        return this.lists[TEAM_LIST].addElement(team);
+    }
+
+    public Error createTournament(Tournament tournament){
+        return lists[TOURNAMENT_LIST].addElement(tournament);
+    }
+}
