@@ -8,18 +8,18 @@ import app.types.commands.Command;
 public class StatisticsShow implements Command {
     private static final int NECESSARY_ARGUMENTS = 1;
 
-    private final SportManagementSystem sportManagementSystem;
+    private final ExecutionController controller;
 
-    public StatisticsShow(SportManagementSystem sportManagementSystem){
-        this.sportManagementSystem = sportManagementSystem;
+    public StatisticsShow(ExecutionController executionController){
+        this.controller = executionController;
+
     }
 
     public Error execute(String[] arguments){
         if(arguments.length < NECESSARY_ARGUMENTS){
             return Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            ExecutionController executionController = new ExecutionController(sportManagementSystem);
-            return executionController.showStatistics(arguments);
+            return controller.showStatistics(arguments);
         }
     }
 }

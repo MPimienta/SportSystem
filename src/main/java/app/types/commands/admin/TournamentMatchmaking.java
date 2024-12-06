@@ -8,10 +8,11 @@ import app.types.commands.Command;
 public class TournamentMatchmaking implements Command {
     private static final int DIFFERENTIATOR = 1;
 
-    private final SportManagementSystem sportManagementSystem;
+    private final ExecutionController controller;
 
-    public TournamentMatchmaking(SportManagementSystem sportManagementSystem){
-        this.sportManagementSystem = sportManagementSystem;
+    public TournamentMatchmaking(ExecutionController executionController){
+        this.controller = executionController;
+
     }
 
     public Error execute(String[] arguments){
@@ -27,7 +28,6 @@ public class TournamentMatchmaking implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            ExecutionController controller = new ExecutionController(this.sportManagementSystem);
             error = controller.tournamentMatchmaking(arguments);
         }
 

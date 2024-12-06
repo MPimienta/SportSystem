@@ -2,16 +2,12 @@ package app.models;
 
 import app.models.lists.*;
 import app.models.lists.elements.*;
-import app.types.commands.common.TournamentList;
 import app.types.users.Admin;
 import app.types.users.CommonUser;
 import app.types.users.User;
 import app.types.Error;
 import app.types.users.UserType;
 import app.views.console.PlayersView;
-
-import java.util.Iterator;
-import java.util.LinkedList;
 
 public class SportManagementSystem {
     private static int IDENTIFIER = 0;

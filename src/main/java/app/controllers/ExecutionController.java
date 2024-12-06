@@ -160,4 +160,27 @@ public class ExecutionController extends Controller{
             this.sportManagementSystem.showTournamentListRanked();
         }
     }
+
+    public Error login(String[] arguments){
+
+        Error error = Error.NULL;
+        if(this.sportManagementSystem.getCurrentUserType() != UserType.COMMON){
+            error = Error.USER_LOGGED_IN;
+        } else {
+            error = this.sportManagementSystem.updateUser(arguments);
+        }
+
+        return error;
+    }
+
+    public Error logout(){
+        Error error = Error.NULL;
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.COMMON){
+            error = Error.ALREADY_LOGGED_OUT;
+        } else {
+            this.sportManagementSystem.logout();
+        }
+
+        return error;
+    }
 }

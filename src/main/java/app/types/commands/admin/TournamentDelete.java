@@ -7,10 +7,12 @@ import app.types.commands.Command;
 
 public class TournamentDelete implements Command {
     private static final int NECESSARY_ARGUMENTS = 1;
-    private final SportManagementSystem sportManagementSystem;
 
-    public TournamentDelete(SportManagementSystem sportManagementSystem){
-        this.sportManagementSystem = sportManagementSystem;
+    private final ExecutionController controller;
+
+    public TournamentDelete(ExecutionController executionController){
+        this.controller = executionController;
+
     }
 
     public Error execute(String[] arguments){
@@ -18,7 +20,6 @@ public class TournamentDelete implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            ExecutionController controller = new ExecutionController(this.sportManagementSystem);
             error = controller.deleteTournament(arguments);
         }
         return error;

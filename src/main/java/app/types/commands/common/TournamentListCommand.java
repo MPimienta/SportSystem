@@ -6,14 +6,14 @@ import app.types.Error;
 import app.types.commands.Command;
 
 public class TournamentListCommand implements Command {
-    private final SportManagementSystem sportManagementSystem;
+    private final ExecutionController controller;
 
-    public TournamentListCommand(SportManagementSystem sportManagementSystem){
-        this.sportManagementSystem = sportManagementSystem;
+    public TournamentListCommand(ExecutionController executionController){
+        this.controller = executionController;
+
     }
     public Error execute(String[] arguments) {
-        ExecutionController executionController = new ExecutionController(sportManagementSystem);
-        executionController.tournamentList();
+        controller.tournamentList();
         return Error.NULL;
     }
 }

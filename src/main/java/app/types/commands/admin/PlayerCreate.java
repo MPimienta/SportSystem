@@ -8,10 +8,11 @@ import app.types.Error;
 public class PlayerCreate implements Command {
     private static final int NECESSARY_ARGUMENTS = 4;
 
-    private final SportManagementSystem sportManagementSystem;
+    private final ExecutionController controller;
 
-    public PlayerCreate(SportManagementSystem sportManagementSystem){
-        this.sportManagementSystem = sportManagementSystem;
+    public PlayerCreate(ExecutionController executionController){
+        this.controller = executionController;
+
     }
 
     public Error execute(String[] arguments){
@@ -19,7 +20,6 @@ public class PlayerCreate implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            ExecutionController controller = new ExecutionController(this.sportManagementSystem);
             error = controller.createPlayer(arguments);
         }
         return error;

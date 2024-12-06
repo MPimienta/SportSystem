@@ -8,10 +8,11 @@ import app.types.commands.Command;
 public class TournamentAdd implements Command {
     private final static int NECESSARY_ARGUMENTS = 1;
 
-    private final SportManagementSystem sportManagementSystem;
+    private final ExecutionController controller;
 
-    public TournamentAdd(SportManagementSystem sportManagementSystem){
-        this.sportManagementSystem = sportManagementSystem;
+    public TournamentAdd(ExecutionController executionController){
+        this.controller = executionController;
+
     }
 
     public Error execute(String[] arguments){
@@ -20,7 +21,6 @@ public class TournamentAdd implements Command {
         if(arguments.length < NECESSARY_ARGUMENTS){
             error = Error.NOT_ENOUGH_ARGUMENTS;
         } else {
-            ExecutionController controller = new ExecutionController(this.sportManagementSystem);
             if(arguments.length == 1){
                 error = controller.tournamentAddPlayer(arguments);
             } else {

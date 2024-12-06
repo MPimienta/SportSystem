@@ -1,5 +1,6 @@
 package app.types.managers;
 
+import app.controllers.ExecutionController;
 import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
@@ -17,23 +18,24 @@ public class CommandManager {
     private final Map<String, Command> commands;
 
     public CommandManager(SportManagementSystem sportManagementSystem) {
+        ExecutionController executionController = new ExecutionController(sportManagementSystem);
         this.commands = new HashMap<>();
 
-        this.commands.put("player_create",new PlayerCreate(sportManagementSystem));
-        this.commands.put("team_create",new TeamCreate(sportManagementSystem));
-        this.commands.put("player_delete",new PlayerDelete(sportManagementSystem));
-        this.commands.put("team_delete",new TeamDelete(sportManagementSystem));
-        this.commands.put("team_add",new TeamAdd(sportManagementSystem));
-        this.commands.put("team_remove",new TeamRemove(sportManagementSystem));
-        this.commands.put("tournament_create",new TournamentCreate(sportManagementSystem));
-        this.commands.put("tournament_delete",new TournamentDelete(sportManagementSystem));
-        this.commands.put("tournament_matchmaking",new TournamentMatchmaking(sportManagementSystem));
-        this.commands.put("login",new Login(sportManagementSystem));
-        this.commands.put("logout",new Logout(sportManagementSystem));
-        this.commands.put("statistics_show",new StatisticsShow(sportManagementSystem));
-        this.commands.put("tournament_add",new TournamentAdd(sportManagementSystem));
-        this.commands.put("tournament_remove",new TournamentDelete(sportManagementSystem));
-        this.commands.put("tournament_list", new TournamentListCommand(sportManagementSystem));
+        this.commands.put("player_create",new PlayerCreate(executionController));
+        this.commands.put("team_create",new TeamCreate(executionController));
+        this.commands.put("player_delete",new PlayerDelete(executionController));
+        this.commands.put("team_delete",new TeamDelete(executionController));
+        this.commands.put("team_add",new TeamAdd(executionController));
+        this.commands.put("team_remove",new TeamRemove(executionController));
+        this.commands.put("tournament_create",new TournamentCreate(executionController));
+        this.commands.put("tournament_delete",new TournamentDelete(executionController));
+        this.commands.put("tournament_matchmaking",new TournamentMatchmaking(executionController));
+        this.commands.put("login",new Login(executionController));
+        this.commands.put("logout",new Logout(executionController));
+        this.commands.put("statistics_show",new StatisticsShow(executionController));
+        this.commands.put("tournament_add",new TournamentAdd(executionController));
+        this.commands.put("tournament_remove",new TournamentDelete(executionController));
+        this.commands.put("tournament_list", new TournamentListCommand(executionController));
     }
 
     public Command getCommand(String input) {
