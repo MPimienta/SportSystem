@@ -1,7 +1,6 @@
 package app.types.commands.admin;
 
 import app.controllers.ExecutionController;
-import app.models.SportManagementSystem;
 import app.types.commands.Command;
 import app.types.Error;
 

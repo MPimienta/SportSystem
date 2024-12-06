@@ -1,4 +1,4 @@
-package app.controllers;
+package app.controllers.execution;
 
 import app.models.SportManagementSystem;
 import app.types.Error;

@@ -1,10 +1,8 @@
 package app.types.commands.common;
 
 import app.controllers.ExecutionController;
-import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
-import app.types.users.UserType;
 
 public class Login implements Command {
     private static final int NECESSARY_ARGUMENTS = 2;
