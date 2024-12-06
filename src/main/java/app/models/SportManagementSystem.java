@@ -36,8 +36,8 @@ public class SportManagementSystem {
         this.creator = new Creator(this.lists);
         this.deleter = new Deleter(this.lists);
 
-        this.currentUser = new CommonUser(this);
-        this.createUser(new Admin("sudo", "sudopassword",this));
+        this.currentUser = new CommonUser();
+        this.createUser(new Admin("sudo", "sudopassword"));
 
 
     }
@@ -81,7 +81,7 @@ public class SportManagementSystem {
     }
 
     public void logout(){
-        this.currentUser = new CommonUser(this);
+        this.currentUser = new CommonUser();
     }
 
     public UserType getCurrentUserType(){

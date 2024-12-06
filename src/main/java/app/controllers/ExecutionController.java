@@ -6,6 +6,7 @@ import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
 import app.models.lists.elements.Tournament;
 import app.types.Error;
+import app.types.users.UserType;
 
 public class ExecutionController extends Controller{
     private final CreateController createController;
@@ -26,90 +27,137 @@ public class ExecutionController extends Controller{
     }
 
     public Error createPlayer(String[] arguments){
-        return this.createController.createPlayer(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+            return this.createController.createPlayer(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
+
     }
 
     public Error deletePlayer(String[] arguments){
-        return this.deleteController.deletePlayer(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+            return this.deleteController.deletePlayer(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error createTeam(String[] arguments){
-        return this.createController.createTeam(arguments);
-    }
-
-    private SinglePlayer getPlayerByIdentifier(String name){
-        return this.sportManagementSystem.getPlayerByIdentifier(name);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+            return this.createController.createTeam(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error deleteTeam(String[] arguments){
-        return this.deleteController.deleteTeam(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+            return this.deleteController.deleteTeam(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error createTournament(String[] arguments){
-        return this.createController.createTournament(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+            return this.createController.createTournament(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error deleteTournament(String[] arguments){
-        return this.deleteController.deleteTournament(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+            return this.deleteController.deleteTournament(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error teamAdd(String[] arguments){
-        return this.addController.teamAdd(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+            return this.addController.teamAdd(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
-    private Team getTeamByIdentifier(String name){
-        return this.sportManagementSystem.getTeamByIdentifier(name);
-    }
 
     public Error teamRemove(String[] arguments){
-        return this.removeController.teamRemove(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+            return this.removeController.teamRemove(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error tournamentMatchmaking(String[] arguments){
-        return this.matchmakingController.tournamentMatchmaking(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+            return this.matchmakingController.tournamentMatchmaking(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error tournamentAddPlayer(String[] arguments){
-        return this.addController.tournamentAddPlayer(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
+            return this.addController.tournamentAddPlayer(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error tournamentAddTeam(String[] arguments){
-        return this.addController.tournamentAddTeam(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
+            return this.addController.tournamentAddTeam(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error tournamentRemovePlayer(String[] arguments){
-        return this.removeController.tournamentRemovePlayer(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
+            return this.removeController.tournamentRemovePlayer(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error tournamentRemoveTeam(String[] arguments){
-        return this.removeController.tournamentRemoveTeam(arguments);
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
+            return this.removeController.tournamentRemoveTeam(arguments);
+        } else {
+            return Error.INVALID_COMMAND;
+        }
     }
 
     public Error showStatistics(String[] arguments){
         Error error = Error.NULL;
-        if(arguments[0].equals("-csv")){
-            this.showController.showStatisticsCsv();
-        } else if(arguments[0].equals("-json")){
-            this.showController.showStatisticsJson();
+
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
+            if(arguments[0].equals("-csv")){
+                this.showController.showStatisticsCsv();
+            } else if(arguments[0].equals("-json")){
+                this.showController.showStatisticsJson();
+            } else {
+                error = Error.UNKNOWN_FORMAT;
+            }
         } else {
-            error = Error.UNKNOWN_FORMAT;
+            error = Error.INVALID_COMMAND;
         }
 
         return error;
     }
 
-    public void adminTournamentList(){
-        this.sportManagementSystem.deletePastTournaments();
-        this.sportManagementSystem.showTournamentListRanked();
-
+    public void tournamentList(){
+        if(this.sportManagementSystem.getCurrentUserType() == UserType.COMMON) {
+            this.sportManagementSystem.showTournamentList();
+        } else {
+            if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
+                this.sportManagementSystem.deletePastTournaments();
+            }
+            this.sportManagementSystem.showTournamentListRanked();
+        }
     }
-
-    public void playerTournamentList(){
-        this.sportManagementSystem.showTournamentListRanked();
-    }
-
-    public void commonTournamentList(){
-        this.sportManagementSystem.showTournamentList();
-    }
-
 }

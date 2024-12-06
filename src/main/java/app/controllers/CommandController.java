@@ -3,17 +3,20 @@ package app.controllers;
 import app.models.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
+import app.types.managers.CommandManager;
 import app.types.users.User;
 
 public class CommandController extends Controller{
+    private final CommandManager commandManager;
 
     public CommandController(SportManagementSystem sportManagementSystem){
         super(sportManagementSystem);
+        this.commandManager = new CommandManager(sportManagementSystem);
+
     }
 
     public Error getCommandError(Command command){
-        User currentUser = this.sportManagementSystem.getCurrentUser();
-        return currentUser.getCommandError(command);
+        return this.commandManager.getCommandError(command);
     }
 
     public Error executeCommand(Command command, String arguments){
@@ -21,7 +24,6 @@ public class CommandController extends Controller{
     }
 
     public Command getCommand(String commandName){
-        User currentUser = this.sportManagementSystem.getCurrentUser();
-        return currentUser.getCommand(commandName);
+        return this.commandManager.getCommand(commandName);
     }
 }

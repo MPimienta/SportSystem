@@ -29,7 +29,7 @@ public class CreateController {
     }
 
     private SinglePlayer makePlayer(String[] arguments, Admin admin){
-        return new SinglePlayer(arguments, admin, this.sportManagementSystem);
+        return new SinglePlayer(arguments, admin);
     }
 
     public Error createTeam(String[] arguments){

@@ -8,6 +8,4 @@ public interface User extends Element {
     UserType getUserType();
     String getUserName();
     String getPassword();
-    Command getCommand(String commandName);
-    Error getCommandError(Command command);
 }

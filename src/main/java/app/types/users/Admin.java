@@ -1,22 +1,14 @@
 package app.types.users;
 
-import app.models.SportManagementSystem;
-import app.types.Error;
-import app.types.commands.Command;
-import app.types.managers.AdminCommandManager;
-import app.types.managers.CommandManager;
-
 public class Admin implements User{
     private final UserType userType;
     private final String userName;
     private final String password;
-    private final CommandManager commandManager;
 
-    public Admin(String userName, String password, SportManagementSystem sportManagementSystem){
+    public Admin(String userName, String password){
         this.userType = UserType.ADMIN;
         this.userName = userName;
         this.password = password;
-        this.commandManager = new AdminCommandManager(sportManagementSystem);
     }
 
     public UserType getUserType(){
@@ -35,24 +27,10 @@ public class Admin implements User{
         return ("user_name: " + this.userName + "\npassword: " + this.password + "\nrole: admin");
     }
 
-    @Override
+
     public String getIdentifier() {
         return this.getUserName();
     }
 
-    public Command getCommand(String input) {
-        return this.commandManager.getCommand(input);
-    }
 
-    public Error getCommandError(Command command){
-        Error error;
-
-        if(command == null){
-            error = Error.INVALID_COMMAND;
-        } else {
-            error = Error.NULL;
-        }
-
-        return error;
-    }
 }
