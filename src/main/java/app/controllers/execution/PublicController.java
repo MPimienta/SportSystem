@@ -24,7 +24,7 @@ public class PublicController {
 
     public Error login(String[] arguments){
 
-        Error error = Error.NULL;
+        Error error;
         if(this.sportManagementSystem.getCurrentUserType() != UserType.COMMON){
             error = Error.USER_LOGGED_IN;
         } else {

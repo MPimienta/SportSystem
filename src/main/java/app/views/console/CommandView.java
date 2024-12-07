@@ -63,12 +63,48 @@ public class CommandView {
     public void test(){
         String[] input = new String[]{"login", "sudo;asd"};
         this.test(input);
+        input = new String[]{"login", "arrobapaco;asd"};
+        this.test(input);
         input = new String[]{"player_create", "arrobapaco;asd;paco;jones"};
         this.test(input);
         input  = new String[]{"player_create", "arrobajuana;asd;juana;juanita"};
         this.test(input);
         input  = new String[]{"player_create", "arrobajuana;asd;juana;juanita"};
         this.test(input);
+        input  = new String[]{"team_create", "tiza;arrobapaco"};
+        this.test(input);
+        input  = new String[]{"team_create", "tiza;arrobapaco;arrobajuana"};
+        this.test(input);
+        input  = new String[]{"tournament_create", "flipo;furvo;champios"};
+        this.test(input);
+        input  = new String[]{"tournament_create", "flipo;furvo;champios;2024-05-25;2024-05-30"};
+        this.test(input);
+        input = new String[]{"logout", "sudo;asd"};
+        this.test(input);
+        input = new String[]{"logout", "sudo;asd"};
+        this.test(input);
+        input = new String[]{"login", "arrobapaco;asd"};
+        this.test(input);
+        input = new String[]{"tournament_add", "flipo;tiza"};
+        this.test(input);
+        input = new String[]{"tournament_list", ""};
+        this.test(input);
+        input = new String[]{"logout", "sudo;asd"};
+        this.test(input);
+        input = new String[]{"login", "sudo;asd"};
+        this.test(input);
+        input  = new String[]{"tournament_create", "pepilleria;furvo;champios;2024-05-25;2024-12-30"};
+        this.test(input);
+        input = new String[]{"logout", "sudo;asd"};
+        this.test(input);
+        input = new String[]{"login", "arrobapaco;asd"};
+        this.test(input);
+        input = new String[]{"tournament_add", "pepilleria"};
+        this.test(input);
+
+
+
+
     }
 
     private void test(String[] input){

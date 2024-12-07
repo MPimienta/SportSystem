@@ -41,7 +41,7 @@ public class PlayerController {
         if (team == null || tournament == null) {
             error = Error.ELEMENT_DOES_NOT_EXIST;
         } else {
-            if(team.hasPlayer(currentPlayer.getIdentifier())){
+            if(!team.hasPlayer(currentPlayer.getIdentifier())){
                 error = Error.PLAYER_NOT_IN_TEAM;
             } else {
                 error = this.sportManagementSystem.tournamentAddPlayer(team, tournament);

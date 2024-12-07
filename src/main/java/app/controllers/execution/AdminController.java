@@ -38,18 +38,21 @@ public class AdminController {
         final int PLAYER_NAME = 1;
 
         Admin admin = (Admin) this.sportManagementSystem.getCurrentUser();
-        SinglePlayer player = this.sportManagementSystem.getPlayerByIdentifier(arguments[PLAYER_NAME]);
+        SinglePlayer[] players = new SinglePlayer[2];
+        for (int i = 0; i < 2; i++) {
+            players[i] = this.sportManagementSystem.getPlayerByIdentifier(arguments[PLAYER_NAME + i]);
+        }
 
-        if(player != null){
-            Team team = this.makeTeam(arguments[TEAM_NAME], player, admin);
+        if(players[0] != null && players[1] != null){
+            Team team = this.makeTeam(arguments[TEAM_NAME], players, admin);
             return this.sportManagementSystem.createTeam(team);
         } else {
             return Error.ELEMENT_DOES_NOT_EXIST;
         }
     }
 
-    private Team makeTeam(String name, SinglePlayer player, Admin admin){
-        return new Team(name, player, admin);
+    private Team makeTeam(String name, SinglePlayer[] players, Admin admin){
+        return new Team(name, players, admin);
     }
 
     public Error createTournament(String[] arguments){

@@ -6,20 +6,46 @@ import app.types.users.Admin;
 import app.types.Error;
 
 public class Team extends Player{
+    private final static int MINIMUM_PLAYERS = 2;
+
     private final PlayerList players;
 
-    public Team(String teamName, SinglePlayer player, Admin admin){
+    public Team(String teamName, SinglePlayer[] newPlayers, Admin admin){
         super(teamName, admin);
         players = new PlayerList();
-        this.addPlayer(player);
+        for (int i = 0; i < MINIMUM_PLAYERS; i++) {
+            this.addPlayer(newPlayers[i]);
+        }
+
     }
 
     public Error addPlayer(SinglePlayer player){
-        return this.players.addElement(player);
+        Error error = this.players.addElement(player);
+        if(error.isNull()){
+            this.updateStatistics();
+        }
+        return error;
+    }
+
+    private void updateStatistics(){
+        double[] statistics = this.getStatistics();
+        for (int i = 0; i < statistics.length; i++) {
+            double sum = 0;
+            for (int j = 0; j < players.getSize(); j++) {
+                SinglePlayer player = (SinglePlayer) players.getElement(j);
+                double[] playerStatistics = player.getStatistics();
+                sum += playerStatistics[i];
+            }
+            statistics[i] = sum / players.getSize();
+        }
     }
 
     public Error removePlayer(String player){
-        return this.players.removeElement(player);
+        Error error = this.players.removeElement(player);
+        if(error.isNull()){
+            this.updateStatistics();
+        }
+        return error;
     }
 
     public int getSize(){

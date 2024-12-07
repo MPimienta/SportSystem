@@ -5,7 +5,7 @@ import app.types.Error;
 import app.types.commands.Command;
 
 public class TeamCreate implements Command {
-    private static final int NECESSARY_ARGUMENTS = 2;
+    private static final int NECESSARY_ARGUMENTS = 3;
 
     private final ExecutionController controller;
 
