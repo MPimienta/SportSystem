@@ -41,8 +41,9 @@ public class TournamentsList extends ListOfElements{
     }
 
     public void deletePastTournaments(){
-        for(Element element : this.getList()){
-            Tournament tournament = (Tournament) element;
+        Iterator<Element> iterator = this.getList().iterator();
+        while(iterator.hasNext()){
+            Tournament tournament = (Tournament) iterator.next();
             if(tournament.hasEnded()){
                 this.removeElement(tournament.getIdentifier());
             }

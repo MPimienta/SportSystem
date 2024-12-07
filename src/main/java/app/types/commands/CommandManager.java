@@ -9,6 +9,7 @@ import app.types.commands.common.Logout;
 import app.types.commands.common.TournamentListCommand;
 import app.types.commands.player.StatisticsShow;
 import app.types.commands.player.TournamentAdd;
+import app.types.commands.player.TournamentRemove;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class CommandManager {
         this.commands.put("logout",new Logout(executionController));
         this.commands.put("statistics_show",new StatisticsShow(executionController));
         this.commands.put("tournament_add",new TournamentAdd(executionController));
-        this.commands.put("tournament_remove",new TournamentDelete(executionController));
+        this.commands.put("tournament_remove",new TournamentRemove(executionController));
         this.commands.put("tournament_list", new TournamentListCommand(executionController));
     }
 

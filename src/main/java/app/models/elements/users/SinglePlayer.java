@@ -38,7 +38,7 @@ public class SinglePlayer extends Player implements User {
     }
 
     public String toCsvFormat(){
-        String result = this.name + "," + this.lastName + "," + this.getIdentifier() + this.playerDNI + "," +
+        String result = this.name + "," + this.lastName + "," + this.getIdentifier() + "," + this.playerDNI + "," +
                         this.getScore() + "," + this.getMatchesWon() + "," + this.getAssistanceScore() + ","
                         + this.getAssistanceScore() + "," + this.getMoney();
 
