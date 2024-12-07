@@ -46,6 +46,10 @@ public abstract class Player implements Element{
         return this.statistics;
     }
 
+    public double getStatistic(int statistic){
+        return this.statistics[statistic];
+    }
+
     public String toString(){
         return "name: " + this.getIdentifier() + ", score: " + this.getScore();
     }

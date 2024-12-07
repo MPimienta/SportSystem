@@ -19,7 +19,8 @@ public abstract class ErrorView {
             "\tThis tournament is already ongoing",
             "\tCurrent player is not in specified team",
             "\tUnknown specified format",
-            "\tIncorrect password"
+            "\tIncorrect password",
+            "\tUnknown category"
     };
 
     public abstract void writeln(Error error);

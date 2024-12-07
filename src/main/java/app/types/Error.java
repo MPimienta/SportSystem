@@ -18,6 +18,7 @@ public enum Error {
     PLAYER_NOT_IN_TEAM,
     UNKNOWN_FORMAT,
     INCORRECT_PASSWORD,
+    UNKNOWN_CATEGORY,
     NULL;
 
     public boolean isNull() {

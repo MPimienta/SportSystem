@@ -20,14 +20,16 @@ public class Tournament implements Element {
     private final String sport;
     private final LocalDate[] dates;
     private final String league;
+    private final int currentStatistic;
 
-    public Tournament(String[] arguments, LocalDate[] dates){
+    public Tournament(String[] arguments, LocalDate[] dates, int currentStatistic){
         this.playerList = new PlayerList();
         this.matchList = new MatchList();
         this.name = arguments[NAME];
         this.sport = arguments[SPORT];
         this.league = arguments[LEAGUE];
         this.dates = dates;
+        this.currentStatistic = currentStatistic;
     }
 
     public Error addPlayer(Player player){
@@ -94,7 +96,7 @@ public class Tournament implements Element {
     }
 
     public String rankedToString(){
-        Player[] ranking = this.rankPlayers();
+        Player[] ranking = this.rankPlayers(currentStatistic);
         String result = "Tournament: " + this.name + "\n";
         for (int i = 0; i < this.playerList.getSize(); i++) {
             result = result + ranking[i].toString() + "\n";
@@ -102,22 +104,22 @@ public class Tournament implements Element {
         return result;
     }
 
-    private Player[] rankPlayers(){
+    private Player[] rankPlayers(int currentStatistic){
         Player[] ranking = new Player[this.playerList.getSize()];
         for (int i = 0; i < this.playerList.getSize(); i++) {
             ranking[i] = (Player) this.playerList.getElement(i);
         }
 
-        this.sort(ranking);
+        this.sort(ranking, currentStatistic);
 
         return ranking;
     }
 
-    private void sort(Player[] ranking){
+    private void sort(Player[] ranking, int currentStatistic){
         for (int i=1; i < ranking.length; i++) {
             Player aux = ranking[i];
             int j = i;
-            while (j > 0 && ranking[j-1].getScore() < aux.getScore()){
+            while (j > 0 && ranking[j-1].getStatistic(currentStatistic) < aux.getStatistic(currentStatistic)){
                 ranking[j] = ranking[j-1];
                 j--;
             }

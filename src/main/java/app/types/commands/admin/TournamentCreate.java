@@ -5,7 +5,7 @@ import app.types.Error;
 import app.types.commands.Command;
 
 public class TournamentCreate implements Command {
-    private static final int NECESSARY_ARGUMENTS = 5;
+    private static final int NECESSARY_ARGUMENTS = 6;
 
     private final ExecutionController controller;
 

@@ -5,6 +5,7 @@ import app.models.lists.elements.Player;
 import app.models.lists.elements.SinglePlayer;
 import app.models.lists.elements.Team;
 import app.models.lists.elements.Tournament;
+import app.types.Categorie;
 import app.types.Error;
 import app.types.users.Admin;
 
@@ -65,7 +66,11 @@ public class AdminController {
             String[] stringDates = new String[]{arguments[START_DATE], arguments[END_DATE]};
             LocalDate[] dates = this.makeDates(stringDates);
             Tournament tournament = this.makeTournament(arguments, dates);
-            error = this.sportManagementSystem.createTournament(tournament);
+            if(tournament != null){
+                error = this.sportManagementSystem.createTournament(tournament);
+            } else {
+                error = Error.UNKNOWN_CATEGORY;
+            }
         } catch(DateTimeParseException ex){
             error = Error.WRONG_DATE_FORMAT;
         }
@@ -81,7 +86,18 @@ public class AdminController {
     }
 
     private Tournament makeTournament(String[] arguments, LocalDate[] dates){
-        return new Tournament(arguments, dates);
+        final int CATEGORIE = 5;
+        final Integer currentCategorie = this.getCurrentCategorie(arguments[CATEGORIE]);
+        if(currentCategorie != null){
+            return new Tournament(arguments, dates, currentCategorie);
+        } else {
+            return null;
+        }
+
+    }
+
+    private Integer getCurrentCategorie(String categorie){
+        return new Categorie().getCategorie(categorie);
     }
 
     public Error teamAdd(String[] arguments){
