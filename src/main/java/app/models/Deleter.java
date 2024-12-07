@@ -70,8 +70,11 @@ public class Deleter {
 
         while(iterator.hasNext()){
             Team team = iterator.next();
-            if(this.isInOngoingTournament(team.getIdentifier())){
+            if(!this.isInOngoingTournament(team.getIdentifier())){
                 team.removePlayer(identifier);
+                if(team.getSize() < 2){
+                    this.lists[TEAM_LIST].removeElement(team.getIdentifier());
+                }
             }
         }
     }
