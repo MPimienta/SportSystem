@@ -4,9 +4,8 @@ import app.models.elements.Team;
 import app.models.elements.Tournament;
 import app.models.elements.users.*;
 import app.models.lists.*;
-import app.models.system.Creator;
-import app.models.system.Deleter;
 import app.types.Error;
+import app.types.UserType;
 import app.views.console.PlayersView;
 
 public class SportManagementSystem {

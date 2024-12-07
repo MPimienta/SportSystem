@@ -8,11 +8,11 @@ public class PlayerList extends ListOfElements{
     }
 
     public String toString(){
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for(Element player : this.getList()){
-            result = result + player.toString() + "\n";
+            result.append(player.toString()).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
 

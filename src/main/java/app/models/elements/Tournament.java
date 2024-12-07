@@ -98,11 +98,11 @@ public class Tournament implements Element {
 
     public String rankedToString(){
         Player[] ranking = this.rankPlayers(currentStatistic);
-        String result = "Tournament: " + this.name + "\n";
+        StringBuilder result = new StringBuilder("Tournament: " + this.name + "\n");
         for (int i = 0; i < this.playerList.getSize(); i++) {
-            result = result + ranking[i].toString() + "\n";
+            result.append(ranking[i].toString()).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
     private Player[] rankPlayers(int currentStatistic){

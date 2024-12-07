@@ -1,4 +1,4 @@
-package app.models.elements.users;
+package app.types;
 
 public enum UserType {
     ADMIN,

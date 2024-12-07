@@ -11,7 +11,6 @@ public class CommandController extends Controller{
     public CommandController(SportManagementSystem sportManagementSystem){
         super(sportManagementSystem);
         this.commandManager = new CommandManager(sportManagementSystem);
-
     }
 
     public Error getCommandError(Command command){

@@ -30,18 +30,22 @@ public abstract class Player implements Element {
     protected double getScore(){
         return this.statistics[SCORE];
     }
+
     protected double getMatchesWon(){
         return this.statistics[MATCHES_WON];
     }
-    protected double getAssistanceScore(){
+    protected double getAssistanceScore() {
         return this.statistics[ASSISTANCE_SCORE];
     }
+
     protected double getTournamentsWon(){
         return this.statistics[TOURNAMENTS_WON];
     }
+
     protected double getMoney(){
         return this.statistics[MONEY];
     }
+
     public double[] getStatistics(){
         return this.statistics;
     }

@@ -3,7 +3,7 @@ package app.controllers;
 import app.controllers.execution.*;
 import app.models.system.SportManagementSystem;
 import app.types.Error;
-import app.models.elements.users.UserType;
+import app.types.UserType;
 
 public class ExecutionController extends Controller {
     private final PlayerController playerController;
@@ -16,23 +16,21 @@ public class ExecutionController extends Controller {
         this.playerController = new PlayerController(sportManagementSystem);
         this.adminController = new AdminController(sportManagementSystem);
         this.publicController = new PublicController(sportManagementSystem);
-
     }
 
     public Error createPlayer(String[] arguments){
         if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
             return this.adminController.createPlayer(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_ADMIN;
         }
-
     }
 
     public Error deletePlayer(String[] arguments){
         if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
             return this.adminController.deletePlayer(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_ADMIN;
         }
     }
 
@@ -40,7 +38,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
             return this.adminController.createTeam(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_ADMIN;
         }
     }
 
@@ -48,7 +46,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
             return this.adminController.deleteTeam(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_ADMIN;
         }
     }
 
@@ -56,7 +54,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
             return this.adminController.createTournament(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_ADMIN;
         }
     }
 
@@ -64,7 +62,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
             return this.adminController.deleteTournament(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_ADMIN;
         }
     }
 
@@ -72,7 +70,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
             return this.adminController.teamAdd(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_ADMIN;
         }
     }
 
@@ -81,7 +79,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
             return this.adminController.teamRemove(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_ADMIN;
         }
     }
 
@@ -89,7 +87,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.ADMIN){
             return this.adminController.tournamentMatchmaking(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_ADMIN;
         }
     }
 
@@ -97,7 +95,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
             return this.playerController.tournamentAddPlayer(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_PLAYER;
         }
     }
 
@@ -105,7 +103,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
             return this.playerController.tournamentAddTeam(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_PLAYER;
         }
     }
 
@@ -113,7 +111,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
             return this.playerController.tournamentRemovePlayer(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_PLAYER;
         }
     }
 
@@ -121,7 +119,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
             return this.playerController.tournamentRemoveTeam(arguments);
         } else {
-            return Error.INVALID_COMMAND;
+            return Error.NOT_PLAYER;
         }
     }
 
@@ -131,7 +129,7 @@ public class ExecutionController extends Controller {
         if(this.sportManagementSystem.getCurrentUserType() == UserType.PLAYER){
             this.playerController.showStatistics(arguments);
         } else {
-            error = Error.INVALID_COMMAND;
+            error = Error.NOT_PLAYER;
         }
 
         return error;

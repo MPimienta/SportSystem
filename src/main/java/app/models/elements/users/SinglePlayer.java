@@ -1,5 +1,7 @@
 package app.models.elements.users;
 
+import app.types.UserType;
+
 public class SinglePlayer extends Player implements User {
     private static final int USER_NAME = 0;
     private static final int PASSWORD = 1;

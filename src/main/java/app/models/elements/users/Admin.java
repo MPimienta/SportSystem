@@ -1,5 +1,7 @@
 package app.models.elements.users;
 
+import app.types.UserType;
+
 public class Admin implements User{
     private final UserType userType;
     private final String userName;
@@ -27,10 +29,7 @@ public class Admin implements User{
         return ("user_name: " + this.userName + "\npassword: " + this.password + "\nrole: admin");
     }
 
-
     public String getIdentifier() {
         return this.getUserName();
     }
-
-
 }

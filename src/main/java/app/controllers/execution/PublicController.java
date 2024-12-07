@@ -2,7 +2,7 @@ package app.controllers.execution;
 
 import app.models.system.SportManagementSystem;
 import app.types.Error;
-import app.models.elements.users.UserType;
+import app.types.UserType;
 
 public class PublicController {
     private final SportManagementSystem sportManagementSystem;

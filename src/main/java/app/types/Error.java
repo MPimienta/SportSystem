@@ -8,7 +8,6 @@ public enum Error {
     NOT_ADMIN,
     ALREADY_LOGGED_OUT,
     USER_LOGGED_IN,
-    USER_ALREADY_EXISTS,
     USER_DOES_NOT_EXIST,
     ELEMENT_DOES_NOT_EXIST,
     WRONG_DATE_FORMAT,
@@ -19,6 +18,7 @@ public enum Error {
     UNKNOWN_FORMAT,
     INCORRECT_PASSWORD,
     UNKNOWN_CATEGORY,
+    NOT_PLAYER,
     NULL;
 
     public boolean isNull() {

@@ -10,7 +10,6 @@ public abstract class ErrorView {
             "\tYou do not possess admin privileges",
             "\tYou are already logged out",
             "\tThere is a user currently logged in",
-            "\tUser already exists",
             "\tUser does not exist",
             "\tPlayer does not exist",
             "\tWrong date format",
@@ -20,7 +19,8 @@ public abstract class ErrorView {
             "\tCurrent player is not in specified team",
             "\tUnknown specified format",
             "\tIncorrect password",
-            "\tUnknown category"
+            "\tUnknown category",
+            "\tYou do not possess player privileges"
     };
 
     public abstract void writeln(Error error);

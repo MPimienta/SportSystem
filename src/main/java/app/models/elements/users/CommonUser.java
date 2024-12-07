@@ -1,5 +1,7 @@
 package app.models.elements.users;
 
+import app.types.UserType;
+
 public class CommonUser implements User{
     private final UserType userType;
 
@@ -15,12 +17,10 @@ public class CommonUser implements User{
         return "guest";
     }
 
-    @Override
     public String getPassword() {
         return "null";
     }
 
-    @Override
     public String getIdentifier() {
         return "";
     }
