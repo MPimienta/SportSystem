@@ -5,7 +5,7 @@ import app.types.commands.Command;
 import app.types.Error;
 
 public class PlayerCreate implements Command {
-    private static final int NECESSARY_ARGUMENTS = 4;
+    private static final int NECESSARY_ARGUMENTS = 5;
 
     private final ExecutionController controller;
 

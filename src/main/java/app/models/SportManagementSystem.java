@@ -66,10 +66,17 @@ public class SportManagementSystem {
     }
 
     public Error updateUser(String[] arguments){
+        final int PASSWORD = 1;
+
         Error error = Error.NULL;
         int index = this.lists[USER_LIST].getIndexOfElement(arguments[IDENTIFIER]);
         if(this.lists[USER_LIST].elementExists(index)){
-            this.currentUser = (User) this.lists[USER_LIST].getElement(index);
+            User user = (User) this.lists[USER_LIST].getElement(index);
+            if(user.getPassword().equals(arguments[PASSWORD])){
+                this.currentUser = user;
+            } else {
+                error = Error.INCORRECT_PASSWORD;
+            }
         } else {
             error = Error.USER_DOES_NOT_EXIST;
         }

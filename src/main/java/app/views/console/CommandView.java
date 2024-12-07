@@ -61,15 +61,15 @@ public class CommandView {
     }
 
     public void test(){
-        String[] input = new String[]{"login", "sudo;asd"};
+        String[] input = new String[]{"login", "sudo;sudopassword"};
         this.test(input);
         input = new String[]{"login", "arrobapaco;asd"};
         this.test(input);
-        input = new String[]{"player_create", "arrobapaco;asd;paco;jones"};
+        input = new String[]{"player_create", "arrobapaco;asd;paco;jones;12345678"};
         this.test(input);
-        input  = new String[]{"player_create", "arrobajuana;asd;juana;juanita"};
+        input  = new String[]{"player_create", "arrobajuana;asd;juana;juanita;15642398"};
         this.test(input);
-        input  = new String[]{"player_create", "arrobajuana;asd;juana;juanita"};
+        input  = new String[]{"player_create", "arrobajuana;asd;juana;juanita;98452675"};
         this.test(input);
         input  = new String[]{"team_create", "tiza;arrobapaco"};
         this.test(input);
@@ -83,6 +83,8 @@ public class CommandView {
         this.test(input);
         input = new String[]{"logout", "sudo;asd"};
         this.test(input);
+        input = new String[]{"login", "arrobapaco;asds"};
+        this.test(input);
         input = new String[]{"login", "arrobapaco;asd"};
         this.test(input);
         input = new String[]{"tournament_add", "flipo;tiza"};
@@ -91,7 +93,7 @@ public class CommandView {
         this.test(input);
         input = new String[]{"logout", "sudo;asd"};
         this.test(input);
-        input = new String[]{"login", "sudo;asd"};
+        input = new String[]{"login", "sudo;sudopassword"};
         this.test(input);
         input  = new String[]{"tournament_create", "pepilleria;furvo;champios;2024-05-25;2024-12-30"};
         this.test(input);
