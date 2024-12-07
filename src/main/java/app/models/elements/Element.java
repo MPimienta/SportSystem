@@ -1,4 +1,4 @@
-package app.models.lists.elements;
+package app.models.elements;
 
 public interface Element {
 

@@ -1,5 +1,6 @@
-package app.models.lists.elements;
+package app.models.elements;
 
+import app.models.elements.users.Player;
 import app.models.lists.MatchList;
 import java.time.LocalDate;
 

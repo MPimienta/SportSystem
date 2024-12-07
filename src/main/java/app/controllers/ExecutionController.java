@@ -1,10 +1,9 @@
 package app.controllers;
 
-import app.controllers.*;
 import app.controllers.execution.*;
-import app.models.SportManagementSystem;
+import app.models.system.SportManagementSystem;
 import app.types.Error;
-import app.types.users.UserType;
+import app.models.elements.users.UserType;
 
 public class ExecutionController extends Controller {
     private final PlayerController playerController;

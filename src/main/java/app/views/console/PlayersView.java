@@ -1,8 +1,7 @@
 package app.views.console;
 
-import app.models.lists.ListOfElements;
 import app.models.lists.TournamentsList;
-import app.models.lists.elements.SinglePlayer;
+import app.models.elements.users.SinglePlayer;
 import app.views.Message;
 import utils.Console;
 

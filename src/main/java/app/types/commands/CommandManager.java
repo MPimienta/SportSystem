@@ -1,9 +1,8 @@
-package app.types.managers;
+package app.types.commands;
 
 import app.controllers.ExecutionController;
-import app.models.SportManagementSystem;
+import app.models.system.SportManagementSystem;
 import app.types.Error;
-import app.types.commands.Command;
 import app.types.commands.admin.*;
 import app.types.commands.common.Login;
 import app.types.commands.common.Logout;

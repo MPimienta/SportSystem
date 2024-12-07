@@ -1,10 +1,4 @@
-package app.models.lists.elements;
-
-import app.types.users.Admin;
-import app.types.users.User;
-import app.types.users.UserType;
-
-import java.util.function.DoubleBinaryOperator;
+package app.models.elements.users;
 
 public class SinglePlayer extends Player implements User {
     private static final int USER_NAME = 0;

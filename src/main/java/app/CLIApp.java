@@ -1,7 +1,7 @@
 package app;
 
 import app.controllers.CommandController;
-import app.models.SportManagementSystem;
+import app.models.system.SportManagementSystem;
 import app.views.View;
 import app.views.console.ConsoleView;
 

@@ -1,9 +1,9 @@
 package app.controllers.execution;
 
-import app.models.SportManagementSystem;
-import app.models.lists.elements.SinglePlayer;
-import app.models.lists.elements.Team;
-import app.models.lists.elements.Tournament;
+import app.models.system.SportManagementSystem;
+import app.models.elements.users.SinglePlayer;
+import app.models.elements.Team;
+import app.models.elements.Tournament;
 import app.types.Error;
 import app.views.console.PlayersView;
 

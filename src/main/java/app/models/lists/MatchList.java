@@ -1,8 +1,8 @@
 package app.models.lists;
 
-import app.models.lists.elements.Element;
-import app.models.lists.elements.Match;
-import app.models.lists.elements.Player;
+import app.models.elements.Element;
+import app.models.elements.Match;
+import app.models.elements.users.Player;
 import app.types.Error;
 
 import java.util.Iterator;

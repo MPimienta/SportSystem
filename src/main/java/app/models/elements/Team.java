@@ -1,11 +1,13 @@
-package app.models.lists.elements;
+package app.models.elements;
 
+import app.models.elements.users.Player;
+import app.models.elements.users.SinglePlayer;
 import app.models.lists.PlayerList;
-import app.types.users.Admin;
+import app.models.elements.users.Admin;
 
 import app.types.Error;
 
-public class Team extends Player{
+public class Team extends Player {
     private final static int MINIMUM_PLAYERS = 2;
 
     private final PlayerList players;

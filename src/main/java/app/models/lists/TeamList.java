@@ -1,8 +1,7 @@
 package app.models.lists;
 
-import app.models.lists.elements.Element;
-import app.models.lists.elements.SinglePlayer;
-import app.models.lists.elements.Team;
+import app.models.elements.Element;
+import app.models.elements.Team;
 
 import java.util.Iterator;
 import java.util.LinkedList;

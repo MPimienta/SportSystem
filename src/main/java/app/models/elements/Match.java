@@ -1,4 +1,6 @@
-package app.models.lists.elements;
+package app.models.elements;
+
+import app.models.elements.users.Player;
 
 public class Match implements Element{
     private final static int PLAYERS_IN_MATCH = 2;

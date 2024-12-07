@@ -1,12 +1,12 @@
-package app.models;
+package app.models.system;
 
+import app.models.elements.Team;
+import app.models.elements.Tournament;
+import app.models.elements.users.*;
 import app.models.lists.*;
-import app.models.lists.elements.*;
-import app.types.users.Admin;
-import app.types.users.CommonUser;
-import app.types.users.User;
+import app.models.system.Creator;
+import app.models.system.Deleter;
 import app.types.Error;
-import app.types.users.UserType;
 import app.views.console.PlayersView;
 
 public class SportManagementSystem {

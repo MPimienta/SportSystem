@@ -1,9 +1,6 @@
 package app.models.lists;
 
-import app.models.lists.elements.Element;
-import app.models.lists.elements.SinglePlayer;
-import app.types.Error;
-import app.types.users.Admin;
+import app.models.elements.Element;
 
 public class PlayerList extends ListOfElements{
     public PlayerList(){

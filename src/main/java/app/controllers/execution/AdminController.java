@@ -1,13 +1,13 @@
 package app.controllers.execution;
 
-import app.models.SportManagementSystem;
-import app.models.lists.elements.Player;
-import app.models.lists.elements.SinglePlayer;
-import app.models.lists.elements.Team;
-import app.models.lists.elements.Tournament;
+import app.models.system.SportManagementSystem;
+import app.models.elements.users.Player;
+import app.models.elements.users.SinglePlayer;
+import app.models.elements.Team;
+import app.models.elements.Tournament;
 import app.types.Categorie;
 import app.types.Error;
-import app.types.users.Admin;
+import app.models.elements.users.Admin;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -62,7 +62,6 @@ public class AdminController {
 
         Error error;
         try{
-            Admin admin = (Admin) this.sportManagementSystem.getCurrentUser();
             String[] stringDates = new String[]{arguments[START_DATE], arguments[END_DATE]};
             LocalDate[] dates = this.makeDates(stringDates);
             Tournament tournament = this.makeTournament(arguments, dates);

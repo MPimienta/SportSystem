@@ -1,11 +1,11 @@
-package app.models;
+package app.models.system;
 
 import app.models.lists.ListOfElements;
 import app.models.lists.TeamList;
 import app.models.lists.TournamentsList;
-import app.models.lists.elements.Player;
-import app.models.lists.elements.Team;
-import app.models.lists.elements.Tournament;
+import app.models.elements.users.Player;
+import app.models.elements.Team;
+import app.models.elements.Tournament;
 import app.types.Error;
 
 import java.util.Iterator;

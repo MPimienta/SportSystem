@@ -1,10 +1,7 @@
 package app.models.lists;
 
-import app.models.lists.elements.Element;
-import app.models.lists.elements.Team;
-import app.models.lists.elements.Tournament;
-import app.types.Error;
-import app.types.users.Admin;
+import app.models.elements.Element;
+import app.models.elements.Tournament;
 
 import java.util.Iterator;
 import java.util.LinkedList;

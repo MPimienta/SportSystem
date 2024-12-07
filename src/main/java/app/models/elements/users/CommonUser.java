@@ -1,4 +1,4 @@
-package app.types.users;
+package app.models.elements.users;
 
 public class CommonUser implements User{
     private final UserType userType;

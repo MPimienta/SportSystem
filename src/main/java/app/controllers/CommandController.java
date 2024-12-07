@@ -1,10 +1,9 @@
 package app.controllers;
 
-import app.models.SportManagementSystem;
+import app.models.system.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.Command;
-import app.types.managers.CommandManager;
-import app.types.users.User;
+import app.types.commands.CommandManager;
 
 public class CommandController extends Controller{
     private final CommandManager commandManager;

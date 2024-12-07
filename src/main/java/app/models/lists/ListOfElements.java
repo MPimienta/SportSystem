@@ -3,7 +3,7 @@ package app.models.lists;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import app.models.lists.elements.Element;
+import app.models.elements.Element;
 import app.types.Error;
 
 public abstract class ListOfElements {

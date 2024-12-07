@@ -1,12 +1,12 @@
-package app.models;
+package app.models.system;
 
 import app.models.lists.ListOfElements;
-import app.models.lists.elements.Player;
-import app.models.lists.elements.SinglePlayer;
-import app.models.lists.elements.Team;
-import app.models.lists.elements.Tournament;
+import app.models.elements.users.Player;
+import app.models.elements.users.SinglePlayer;
+import app.models.elements.Team;
+import app.models.elements.Tournament;
 import app.types.Error;
-import app.types.users.User;
+import app.models.elements.users.User;
 
 public class Creator {
     private static final int IDENTIFIER = 0;

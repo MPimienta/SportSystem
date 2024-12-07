@@ -1,8 +1,8 @@
-package app.models.lists.elements;
+package app.models.elements.users;
 
-import app.types.users.Admin;
+import app.models.elements.Element;
 
-public abstract class Player implements Element{
+public abstract class Player implements Element {
     private static final int SCORE = 0;
     private static final int MATCHES_WON = 1;
     private static final int ASSISTANCE_SCORE = 2;
