@@ -5,7 +5,7 @@ import app.models.elements.users.Player;
 import app.models.elements.users.SinglePlayer;
 import app.models.elements.Team;
 import app.models.elements.Tournament;
-import app.types.Categorie;
+import app.types.Category;
 import app.types.Error;
 import app.models.elements.users.Admin;
 
@@ -96,7 +96,7 @@ public class AdminController {
     }
 
     private Integer getCurrentCategorie(String categorie){
-        return new Categorie().getCategorie(categorie);
+        return new Category().getCategorie(categorie);
     }
 
     public Error teamAdd(String[] arguments){

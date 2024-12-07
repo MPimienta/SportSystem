@@ -1,14 +1,12 @@
 package app.types;
 
-import app.types.commands.Command;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class  Categorie {
+public class Category {
     private final Map<String, Integer> categories;
 
-    public Categorie(){
+    public Category(){
         this.categories = new HashMap<>();
 
         this.categories.put("score",0);
