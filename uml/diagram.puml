@@ -684,6 +684,24 @@
         }
 
     }
-    SportManagementSystem *-down-> CommandManager
+    CommandController *-down-> CommandManager
+    CommandController -down-> SporManagementSystem
+    SportManagementSystem *-down-> ListOfElements
+    SportManagementSystem *-down-> User
     ExecutionController .down.> Command
+    View <|-down- ConsoleView
+    CLIApp *-down-> SportManagementSystem
+    CLIApp *-down-> CommandController
+    CLIApp *-down-> View
+    Category .down.> AdminController
+    Error .down.> CommandView
+    UserType .down.> SportManagementSystem
+    ConsoleView *-down-> CommandView
+    CommandController .down.> CommandView
+    UserView .down.> CommandView
+    PlayersView .down.> CommandView
+    ErrorView .down.> CommandView
+    MessageView .down.> CommandView
+    Message .down.> MessageView
+    Error .down.> ErrorView
 @enduml
