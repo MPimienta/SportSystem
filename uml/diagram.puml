@@ -1,0 +1,689 @@
+@startuml 
+    package app{
+        package controllers{
+
+            Controller <|-down- ExecutionController
+            Controller <|-down- CommandController
+
+            package execution{
+                ExecutionController *-down-> AdminController
+                ExecutionController *-down-> PublicController
+                ExecutionController *-down-> PlayerController
+
+                class AdminController{
+                    - SportManagementSystem sportManagementSystem
+                    
+                    + AdminController(SportManagementSystem)
+                    + createPlayer(String[]):Error
+                    - makePlayer(String[],Admin):SinglePlayer
+                    + createTeam(String[]):Error
+                    - makeTeam(String,String[],Admin):Team
+                    + createTournament(String[]):Error
+                    - makeDates(String[]):LocalDate[]
+                    - makeTournament(String[],LocalDate[]):Tournament
+                    - getCurrentCategory(String):Integer
+                    + teamAdd(String[]):Error
+                    + teamRemove(String[]):Error
+                    + deletePlayer(String[]):Error
+                    + deleteTeam(String[]):Error
+                    + deleteTournament(String[]):Error
+                    + tournamentMatchmaking(String[]):Error
+                    - manualTournamentMatchmaking(Tournament,String[]):Error
+                    - getPlayers(String[]):Player[]
+                }
+
+                class PlayerController{
+                    - SportManagementSystem sportManagementSystem
+                    
+                    + PlayerController(SportManagementSystem)
+                    + tournamentAddPlayer(String[]):Error
+                    + tournamentAddTeam(String[]):Error
+                    + tournamentRemovePlayer(String[]):Error
+                    + tournamentRemoveTeam(String[]):Error
+                    + showStatistics(String[]):Error
+                    - showStatisticsCsv()
+                    - showStatisticsJson()
+                }
+
+                class PublicController{
+                    - SportManagementSystem sportManagementSystem
+                    
+                    + PublicController(SportManagementSystem)
+                    + tournamentList()
+                    + login(String[]):Error
+                    + logout():Error
+                }
+
+            }
+
+            class CommandController{
+                - CommandManager commandManager
+
+                + CommandController(SportManagementSystem)
+                + getCommandError(Command):Error
+                + executeCommand(Command):Error
+                + getCommand(String):Command
+            }
+
+            abstract class Controller{
+                # SportManagementSystem sportManagementSystem
+
+                ~ Controller(SportManagementSystem)
+            }
+
+            class ExecutionController{
+                - PlayerController playerController
+                - AdminController adminController
+                - PublicController publicController
+
+                + ExecutionController(SportmanagementSystem)
+                + createPlayer(String[]):Error
+                + createTeam(String[]):Error
+                + createTournament(String[]):Error
+                + teamAdd(String[]):Error
+                + teamRemove(String[]):Error
+                + deletePlayer(String[]):Error
+                + deleteTeam(String[]):Error
+                + deleteTournament(String[]):Error
+                + tournamentMatchmaking(String[]):Error
+                + tournamentAddPlayer(String[]):Error
+                + tournamentAddTeam(String[]):Error
+                + tournamentRemovePlayer(String[]):Error
+                + tournamentRemoveTeam(String[]):Error
+                + showStatistics(String[]):Error
+                + tournamentList()
+                + login(String[]):Error
+                + logout():Error
+
+            }
+
+        }
+
+        package models{
+            package elements{
+                
+                Element <|-down- Player
+                Element <|-down- Match
+                Element <|-down- Tournament
+                Player <|-down- Team
+
+                package users{
+
+                    Element <|-down- User
+                    User <|-down- Admin
+                    User <|-down- CommonUser
+                    User <|-down- SinglePlayer
+                    Player <|-down- SinglePlayer
+
+                    class Admin{
+                        - UserType userType
+                        - String userName
+                        - String password
+
+                        + Admin(String,String)
+                        + getUserType():UserType
+                        + getUserName():String
+                        + getPassword():String
+                        + toString():String
+                        + getIdentifier():String
+                    }
+                    
+                    class CommonUser{
+                        - UserType userType
+
+                        + CommonUser()
+                        + getUserType():UserType
+                        + getUserName():String
+                        + getPassword():String
+                        + getIdentifier():String
+                    }
+
+                    class SinglePlayer{
+                        - {static} int USER_NAME = 0
+                        - {static} int PASSWORD = 1
+                        - {static} int NAME = 2
+                        - {static} int LAST_NAME = 3
+                        - {static} int DNI = 4
+                        -------------------
+                        - UserType userType
+                        - String name
+                        - String lastName
+                        - String password
+                        - String playerDni
+
+                        + SinglePlayer(String[],Admin)
+                        + getUserType():UserType
+                        + getUserName():String
+                        + getPassword():String
+                        + toCsvFormat():String
+                        + toJsonFormat():String
+                    }
+
+                    interface User{
+                        + getUserType():UserType
+                        + getUserName():String
+                        + getPassword():String
+                    }
+
+                }
+
+                abstract class Player{
+                    - {static} int SCORE = 0
+                    - {static} int MATCHES_WON = 1
+                    - {static} int ASSISTANCE_SCORE = 2
+                    - {static} int TOURNAMENTS_WON = 3
+                    - {static} int MONEY = 4
+                    -------------------
+                    - String identifier
+                    - Admin creator
+                    - double[] statistics
+
+                    + Player(String, Admin)
+                    + getUserType():UserType
+                    + getUserName():String
+                    + getPassword():String
+                    + toString():String
+                    + getCreator():Admin
+                    + getScore():double
+                    + getMatchesWon():double
+                    + getAssistanceScore():double
+                    + getTournamentsWon():double
+                    + getMoney():double
+                    + getStatistics():double[]
+                    + getStatistic(int):double
+                    + getIdentifier():String
+                }
+
+                interface Element{
+                    + getIdentifier():String
+                }
+
+                class Match{
+                    - {static} int PLAYERS_IN_MATCH = 2
+                    ---------------------
+                    - Player[] match
+
+                    + Match(Player[])
+                    + containsPlayer(Player):boolean
+                    + toString():String
+                    + getIdentifier():String
+                }
+
+                class Team{
+                    - {static} int MINIMUM_PLAYERS = 2
+                    ---------------------
+                    - PlayerList players
+
+                    + Team(String,SinglePlayer[],Admin)
+                    + addPlayer(SinglePlayer):Error
+                    - updateStatistics()
+                    + removePlayer(String):Error
+                    + getSize():int
+                    + hasPlayer(String):boolean 
+
+                }
+
+                class Tournament{
+                    - {static} int NAME = 0
+                    - {static} int SPORT = 1
+                    - {static} int LEAGU = 2
+                    - {static} int START_DATE = 0
+                    - {static} int END_DATE = 1
+                    ---------------------
+                    - MatchList matchList
+                    - PlayerList playerList
+                    - String name
+                    - String sport
+                    - LocalDate[] dates
+                    - String league
+                    - int currentStatistic
+
+                    + Tournament(String[],LocalDate[],int)
+                    + addPlayer(Player):Error
+                    + getIdentifier():String
+                    + randomMatchmake():Error
+                    + manualMatchmake(Player[]):Error
+                    + removePlayer(String):Error
+                    + hasPlayer(Player):boolean
+                    + isOngoing():boolean
+                    + hasEnded():boolean
+                    + toString():String
+                    + rankedToString():String
+                    - rankPlayers(int):Player[]
+                    - sort(Player[],int)
+                }
+
+            }
+
+            package lists{
+
+                ListOfElements <|-down- MatchList
+                ListOfElements <|-down- PlayerList
+                ListOfElements <|-down- TeamList
+                ListOfElements <|-down- UserList
+                ListOfElements <|-down- TournamentList
+                ListOfElements *-down-> Element
+
+
+                abstract class ListOfElements{
+                    - LinkedList<Element> list
+
+                    + ListOfElements()
+                    + addElement(Element):Error
+                    + getIndexOfElement(String):int
+                    + elementExists(int):boolean
+                    + getElement(int):Element
+                    + removeElement(String):Error
+                    + getElementByIdentifier(String):Element
+                    # getList():LinkedList<Element>
+                    + getSize():int
+                    + toString():String
+                }
+
+                class MatchList{
+                    - {static} PLAYERS_IN_MATCH = 2
+                    
+                    + MatchList()
+                    + randomMatchmake(PlayerList)
+                    - makeAuxIndexList(int):ArrayList<Integer>
+                    + manualMatchmake(Player[]):Error
+                    - isPlayerInMatch(Player[]):boolean
+                }
+
+                class PlayerList{
+                    + PlayerList()
+                    + toString():String
+                }
+
+                class TeamList{
+                    + TeamList()
+                    + deletePlayer(String):Error
+                    + getPlayerTeams(String):LinkedList<Team>
+                }
+
+                class TournamentList{
+                    + TournamentList()
+                    + getPlayerTournaments(String):LinkedList<Tournament>
+                    + deletePlayer(String)
+                    + toString():String
+                    + deletePastTournaments()
+                    + rankedToString()
+                }
+
+                class UserList{
+                    + UserList()
+                }
+
+            }
+
+            package system{
+
+                SportManagementSystem *-down-> Creator
+                SportManagementSystem *-down-> Deleter
+
+                class Creator{
+                    - {static} int PLAYER_LIST = 0
+                    - {static} int USER_LIST = 1
+                    - {static} int TEAM_LIST = 2
+                    - {static} int TOURNAMENT_LIST = 3
+                    ---------------
+                    - ListOfElements[] lists
+
+                    + Creator(ListOfElements[])
+                    + createUser(User):Error
+                    + createPlayer(Player):Error
+                    + createTeam(Team):Error
+                    + createTournament(Tournament):Error
+                    + teamAdd(Team,SinglePlayer):Error
+                    + tournamentAddPlayer(Player,Tournament):Error
+                
+                }
+
+                class Deleter{
+                    - {static} int PLAYER_LIST = 0
+                    - {static} int USER_LIST = 1
+                    - {static} int TEAM_LIST = 2
+                    - {static} int TOURNAMENT_LIST = 3
+                    ---------------
+                    - ListOfElements[] lists
+
+                    + Deleter(ListOfElements[])
+                    + deletePlayer(String):Error
+                    - inInOngoingTournament(String):boolean
+                    - getPlayerTournaments(String):LinkedList<Tournament>
+                    - deletePlayerInTeams(String)
+                    - deletePlayerInTournaments(String)
+                    + deleteTeam(String):Error
+                    + deleteTournament(String):Error
+                    + tournamentRemovePlayer(Player;Tournament):Error
+                    + teamRemove(Team,String):Error
+
+                }
+
+                class SportManagementSystem{
+                    - {static} int PLAYER_LIST = 0
+                    - {static} int USER_LIST = 1
+                    - {static} int TEAM_LIST = 2
+                    - {static} int TOURNAMENT_LIST = 3
+                    ---------------
+                    - ListOfElements[] lists
+                    - User currentUser
+                    - Creator creator
+                    - Deleter Deleter
+
+                    + SportManagementSystem()
+                    + createUser(User):Error
+                    + createPlayer(Player):Error
+                    + createTeam(Team):Error
+                    + createTournament(Tournament):Error
+                    + teamAdd(Team,SinglePlayer):Error
+                    + teamRemove(Team,String):Error
+                    + deletePlayer(String):Error
+                    + deleteTeam(String):Error
+                    + deleteTournament(String):Error
+                    + updateUser(String[]):Error
+                    + getPlayerByIdentifier(String):SinglePlayer
+                    + getTeamByIdentifier(String):Team
+                    + getTournamentByIdentifier(String):Tournament
+                    + manualMatchmake(Tournament,Player[]):Error
+                    + randomMatchmake():Error
+                    + tournamentAddPlayer(Player,Tournament):Error
+                    + tournamentRemovePlayer(Player,Tournament):Error
+                    + showTournamentList()
+                    + showTournamentListRanked()
+                    + logout()
+                    + getCurrentUser():User
+                    + getCurrentUserType():UserType
+                }
+
+                
+
+            }
+
+        }
+
+        package types{
+            package commands{
+
+                package admin{
+
+                    
+
+                    class PlayerCreate{
+                        - {static} int NECESSARY_ARGUMENTS = 5
+                        ---------------
+                        - ExecutionController controller
+
+                        + PlayerCreate(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class PlayerDelete{
+                        - {static} int NECESSARY_ARGUMENTS = 1
+                        ---------------
+                        - ExecutionController controller
+
+                        + PlayerDelete(ExecutionController)
+                        + execute(String[]):Error
+                    }
+                    class TeamAdd{
+                        - {static} int NECESSARY_ARGUMENTS = 2
+                        ---------------
+                        - ExecutionController controller
+
+                        + TeamAdd(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class TeamRemove{
+                        - {static} int NECESSARY_ARGUMENTS = 2
+                        ---------------
+                        - ExecutionController controller
+
+                        + TeamRemove(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class TeamCreate{
+                        - {static} int NECESSARY_ARGUMENTS = 3
+                        ---------------
+                        - ExecutionController controller
+
+                        + TeamCreate(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class TeamDelete{
+                        - {static} int NECESSARY_ARGUMENTS = 1
+                        ---------------
+                        - ExecutionController controller
+
+                        + TeamDelete(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class TournamentCreate{
+                        - {static} int NECESSARY_ARGUMENTS = 6
+                        ---------------
+                        - ExecutionController controller
+
+                        + TournamentCreate(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class TournamentDelete{
+                        - {static} int NECESSARY_ARGUMENTS = 1
+                        ---------------
+                        - ExecutionController controller
+
+                        + TournamentDelete(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class TournamentMatchmaking{
+                        - {static} int DIFFERENTIATOR = 5
+                        ---------------
+                        - ExecutionController controller
+
+                        + Tournament_Matchmaking(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                }
+
+                package common{
+
+                    
+
+                    class Login{
+                        - {static} int NECESSARY_ARGUMENTS = 2
+                        ---------------
+                        - ExecutionController controller
+
+                        + Login(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class Logout{
+                        - ExecutionController controller
+
+                        + Logout(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class TournamentListCommand{
+                        - ExecutionController controller
+
+                        + TournamentListCommand(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                }
+
+                package player{
+
+                    
+
+                    class StatisticsShow{
+                        - {static} int NECESSARY_ARGUMENTS = 1
+                        ---------------
+                        - ExecutionController controller
+
+                        + StatisticsShow(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class TournamentAdd{
+                        - {static} int NECESSARY_ARGUMENTS = 1
+                        ---------------
+                        - ExecutionController controller
+
+                        + TournamentAdd(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                    class TournamentRemove{
+                        - {static} int NECESSARY_ARGUMENTS = 1
+                        ---------------
+                        - ExecutionController controller
+
+                        + TournamentRemove(ExecutionController)
+                        + execute(String[]):Error
+                    }
+
+                }
+
+                interface Command{
+                    + execute(String[]):Error
+                }
+
+                class CommandManager{
+                    - Map<String, Command> commands
+
+                    + CommandManager(SporManagementSystem)
+                    + getCommand(String):Command
+                    + getCommandError(Command):Error
+                }
+
+                CommandManager *-down-> Command
+                Command <|-up- TournamentAdd
+                Command <|-up- TournamentRemove
+                Command <|-up- StatisticsShow
+                Command <|-up- Login
+                Command <|-up- Logout
+                Command <|-up- TournamentListCommand
+                Command <|-down- PlayerCreate
+                Command <|-down- PlayerDelete
+                Command <|-down- TeamCreate
+                Command <|-down- TeamDelete
+                Command <|-down- TeamAdd
+                Command <|-down- TeamRemove
+                Command <|-down- TournamentCreate
+                Command <|-down- TournamentDelete
+                Command <|-down- TournamentMatchmaking
+
+            }
+
+            class Category{
+                - Map<String, Integer> catefories
+
+                + Category()
+                + getCategorie(String):int
+            }
+
+            enum Error{
+                + isNull():boolean
+            }
+
+            enum UserType{
+
+            }
+
+        }
+
+        package views{
+            package console{
+                class CommandView{
+                    - {static} int COMMAND = 0
+                    - {static} int ARGUMENTS = 1
+                    ---------------
+                    - CommandController commandController
+
+                    + CommandView(CommandController)
+                    + interact()
+                    - readCommand():String[]
+                    - getInput():String[]
+                    - getCommand(String[]):Command
+                    - getCommandError(Command):Error
+                    - execute(Command,String)
+                    - getArguments(String[]):String
+                }
+
+                class ConsoleView{
+                    - ConsoleView consoleView
+
+                    + ConsoleView(CommandController)
+                    + read()
+                }
+
+                class ErrorView{
+                    + writeln(Error)
+                }
+
+                class MessageView{
+                    + write(Message)
+                    + writeln(Message)
+                }
+
+                class PlayersView{
+                    + showStatisticsCsv(SinglePlayer)
+                    + showStatisticsJson(SinglePlayer)
+                    + showTournamentList(TournamentList)
+                    + showTournamentListRanked(String)
+                }
+
+                class UserView{
+                    + getInput():String
+                }
+
+            }
+
+            abstract class ErrorView{
+                - {static} String[] MESSAGES
+
+                + {abstract} writeln(Error)
+            }
+
+            enum Message{
+                - String message
+
+                + Message(String)
+                + toString():String
+            }
+
+            abstract class View{
+                - CommandController commandController
+
+                + View(CommandController)
+                + {abstract} read()
+            }
+
+            View *-down-> Controller
+            Controller *-down-> SportManagementSystem
+
+        }
+
+        class CLIApp{
+            - SportManagementSystem sportManagementSystem
+            - View view
+            - CommandController commandController
+
+            - CLIApp()
+            - play()
+            + {static} main(String[])
+        }
+
+    }
+    SportManagementSystem *-down-> CommandManager
+    ExecutionController .down.> Command
+@enduml
