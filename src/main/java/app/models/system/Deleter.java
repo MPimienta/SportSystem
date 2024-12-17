@@ -101,19 +101,54 @@ public class Deleter {
     public Error deleteTeam(String team){
         if(!this.isInOngoingTournament(team)){
             this.deletePlayerInTournaments(team);
-            return lists[TEAM_LIST].removeElement(team);
+            Error error = lists[TEAM_LIST].removeElement(team);
+            if(error.isNull()){
+                try{
+                    ObjectOutputStream writeFile = new ObjectOutputStream(new FileOutputStream("src/main/resources/data/teams.txt"));
+                    writeFile.reset();
+                    writeFile.writeObject(this.lists[TEAM_LIST]);
+                    writeFile.close();
+                } catch (Exception e) {
+                    System.out.println("ERROR AL ABRIR EL ARCHIVO");
+                }
+            }
+            return error;
         } else {
             return Error.PLAYER_IN_ONGOING_TOURNAMENT;
         }
     }
 
     public Error deleteTournament(String tournament){
-        return lists[TOURNAMENT_LIST].removeElement(tournament);
+        Error error = lists[TOURNAMENT_LIST].removeElement(tournament);
+        if(error.isNull()){
+            try{
+                ObjectOutputStream writeFile = new ObjectOutputStream(new FileOutputStream("src/main/resources/data/tournaments.txt"));
+                writeFile.reset();
+                writeFile.writeObject(this.lists[TOURNAMENT_LIST]);
+                writeFile.close();
+            } catch (Exception e) {
+                System.out.println("ERROR AL ABRIR EL ARCHIVO");
+            }
+        }
+        return error;
+
+
     }
 
     public Error tournamentRemovePlayer(Player player, Tournament tournament){
         if (!tournament.isOngoing()){
-            return tournament.removePlayer(player.getIdentifier());
+            Error error = tournament.removePlayer(player.getIdentifier());
+            if(error.isNull()){
+                try{
+                    ObjectOutputStream writeFile = new ObjectOutputStream(new FileOutputStream("src/main/resources/data/tournaments.txt"));
+                    writeFile.reset();
+                    writeFile.writeObject(this.lists[TOURNAMENT_LIST]);
+                    writeFile.close();
+                } catch (Exception e) {
+                    System.out.println("ERROR AL ABRIR EL ARCHIVO");
+                }
+            }
+            return error;
         } else {
             return Error.ONGOING_TOURNAMENT;
         }
@@ -121,10 +156,23 @@ public class Deleter {
 
     public Error teamRemove(Team team, String player){
         Error error = team.removePlayer(player);
+
         if(team.getSize() < 2){
             this.lists[TEAM_LIST].removeElement(team.getIdentifier());
+            if(error.isNull()){
+                try{
+                    ObjectOutputStream writeFile = new ObjectOutputStream(new FileOutputStream("src/main/resources/data/teams.txt"));
+                    writeFile.reset();
+                    writeFile.writeObject(this.lists[TEAM_LIST]);
+                    writeFile.close();
+                } catch (Exception e) {
+                    System.out.println("ERROR AL ABRIR EL ARCHIVO");
+                }
+            }
         }
         return error;
     }
+
+    //Todo: Abstract the write_in_file blocks into a single method in a separated class since the code is 99% the same
 
 }
