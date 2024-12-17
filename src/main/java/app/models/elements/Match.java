@@ -2,7 +2,9 @@ package app.models.elements;
 
 import app.models.elements.users.Player;
 
-public class Match implements Element{
+import java.io.Serializable;
+
+public class Match implements Element, Serializable {
     private final static int PLAYERS_IN_MATCH = 2;
 
     private final Player[] match;

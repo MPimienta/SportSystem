@@ -2,7 +2,9 @@ package app.models.lists;
 
 import app.models.elements.Element;
 
-public class PlayerList extends ListOfElements{
+import java.io.Serializable;
+
+public class PlayerList extends ListOfElements implements Serializable {
     public PlayerList(){
         super();
     }

@@ -3,10 +3,11 @@ package app.models.lists;
 import app.models.elements.Element;
 import app.models.elements.Tournament;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class TournamentsList extends ListOfElements{
+public class TournamentsList extends ListOfElements implements Serializable {
     public TournamentsList(){
         super();
     }

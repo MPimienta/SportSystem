@@ -3,10 +3,11 @@ package app.models.lists;
 import app.models.elements.Element;
 import app.models.elements.Team;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class TeamList extends ListOfElements{
+public class TeamList extends ListOfElements implements Serializable {
     public TeamList(){
         super();
     }

@@ -2,7 +2,9 @@ package app.models.elements.users;
 
 import app.models.elements.Element;
 
-public abstract class Player implements Element {
+import java.io.Serializable;
+
+public abstract class Player implements Element, Serializable {
     private static final int SCORE = 0;
     private static final int MATCHES_WON = 1;
     private static final int ASSISTANCE_SCORE = 2;
