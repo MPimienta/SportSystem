@@ -8,6 +8,8 @@ import app.models.elements.Team;
 import app.models.elements.Tournament;
 import app.types.Error;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -33,6 +35,18 @@ public class Deleter {
             error = lists[PLAYER_LIST].removeElement(player);
             if(error.isNull()){
                 lists[USER_LIST].removeElement(player);
+                try{
+                    ObjectOutputStream writeFilePlayers = new ObjectOutputStream(new FileOutputStream("src/main/resources/data/players.txt"));
+                    ObjectOutputStream writeFileUsers = new ObjectOutputStream(new FileOutputStream("src/main/resources/data/users.txt"));
+                    writeFilePlayers.reset();
+                    writeFilePlayers.writeObject(this.lists[PLAYER_LIST]);
+                    writeFilePlayers.close();
+                    writeFileUsers.reset();
+                    writeFileUsers.writeObject(this.lists[USER_LIST]);
+                    writeFileUsers.close();
+                } catch (Exception e) {
+                    System.out.println("ERROR AL ABRIR EL ARCHIVO");
+                }
             }
         } else {
             error = Error.PLAYER_IN_ONGOING_TOURNAMENT;
