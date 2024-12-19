@@ -3,6 +3,7 @@ package app.models.elements;
 import app.models.elements.users.Player;
 import app.models.lists.MatchList;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -10,6 +11,9 @@ import app.models.lists.PlayerList;
 import app.types.Error;
 
 public class Tournament implements Element, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private static final int NAME = 0;
     private static final int SPORT = 1;
     private static final int LEAGUE = 2;

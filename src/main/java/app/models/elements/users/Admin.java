@@ -2,9 +2,13 @@ package app.models.elements.users;
 
 import app.types.UserType;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Admin implements User, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final UserType userType;
     private final String userName;
     private final String password;

@@ -5,6 +5,7 @@ import app.models.elements.Match;
 import app.models.elements.users.Player;
 import app.types.Error;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Random;
@@ -12,6 +13,9 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class MatchList extends ListOfElements implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final static int PLAYERS_IN_MATCH = 2;
 
     public MatchList(){

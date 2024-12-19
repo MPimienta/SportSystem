@@ -1,5 +1,6 @@
 package app.models.lists;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,6 +9,9 @@ import app.models.elements.Element;
 import app.types.Error;
 
 public abstract class ListOfElements implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final LinkedList<Element> list;
 
     public ListOfElements(){

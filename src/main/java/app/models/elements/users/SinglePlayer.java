@@ -2,9 +2,13 @@ package app.models.elements.users;
 
 import app.types.UserType;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class SinglePlayer extends Player implements User, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private static final int USER_NAME = 0;
     private static final int PASSWORD = 1;
     private static final int NAME = 2;

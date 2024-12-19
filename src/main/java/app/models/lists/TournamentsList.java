@@ -3,11 +3,15 @@ package app.models.lists;
 import app.models.elements.Element;
 import app.models.elements.Tournament;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class TournamentsList extends ListOfElements implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     public TournamentsList(){
         super();
     }

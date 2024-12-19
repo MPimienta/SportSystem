@@ -2,9 +2,13 @@ package app.models.elements.users;
 
 import app.models.elements.Element;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public abstract class Player implements Element, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private static final int SCORE = 0;
     private static final int MATCHES_WON = 1;
     private static final int ASSISTANCE_SCORE = 2;

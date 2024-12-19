@@ -8,9 +8,11 @@ import app.types.Error;
 import app.types.UserType;
 import app.views.console.PlayersView;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class SportManagementSystem implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private static final int PLAYER_LIST = 0;

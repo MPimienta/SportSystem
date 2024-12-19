@@ -2,9 +2,13 @@ package app.models.elements;
 
 import app.models.elements.users.Player;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Match implements Element, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final static int PLAYERS_IN_MATCH = 2;
 
     private final Player[] match;

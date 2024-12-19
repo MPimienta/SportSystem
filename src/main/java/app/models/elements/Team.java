@@ -7,9 +7,13 @@ import app.models.elements.users.Admin;
 
 import app.types.Error;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Team extends Player implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final static int MINIMUM_PLAYERS = 2;
 
     private final PlayerList players;
