@@ -5,6 +5,10 @@ import app.models.system.SportManagementSystem;
 import app.views.View;
 import app.views.console.ConsoleView;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+
 public class CLIApp {
     private final SportManagementSystem sportManagementSystem;
     private final View view;

@@ -8,11 +8,10 @@ import app.models.elements.Team;
 import app.models.elements.Tournament;
 import app.types.Error;
 
-import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Deleter implements Serializable {
+public class Deleter {
     private static final int IDENTIFIER = 0;
 
     private static final int PLAYER_LIST = 0;
