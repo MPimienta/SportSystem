@@ -1,5 +1,6 @@
 package app.controllers.execution;
 
+import app.models.system.FileHandler;
 import app.models.system.SportManagementSystem;
 import app.models.elements.users.Player;
 import app.models.elements.users.SinglePlayer;
@@ -120,7 +121,7 @@ public class AdminController {
 
     public Error deleteTeam(String[] arguments){
         final int PLAYER_IDENTIFIER = 0;
-        return this.sportManagementSystem.deletePlayer(arguments[PLAYER_IDENTIFIER]);
+        return this.sportManagementSystem.deleteTeam(arguments[PLAYER_IDENTIFIER]);
     }
 
     public Error deleteTournament(String[] arguments){
@@ -184,4 +185,6 @@ public class AdminController {
         }
         return players;
     }
+
+
 }

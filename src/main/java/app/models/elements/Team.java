@@ -7,7 +7,9 @@ import app.models.elements.users.Admin;
 
 import app.types.Error;
 
-public class Team extends Player {
+import java.io.Serializable;
+
+public class Team extends Player implements Serializable {
     private final static int MINIMUM_PLAYERS = 2;
 
     private final PlayerList players;

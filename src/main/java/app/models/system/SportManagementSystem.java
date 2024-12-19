@@ -8,15 +8,17 @@ import app.types.Error;
 import app.types.UserType;
 import app.views.console.PlayersView;
 
-public class SportManagementSystem {
-    private static int IDENTIFIER = 0;
+import java.io.Serializable;
 
-    private static int PLAYER_LIST = 0;
-    private static int USER_LIST = 1;
-    private static int TEAM_LIST = 2;
-    private static int TOURNAMENT_LIST = 3;
+public class SportManagementSystem implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    private ListOfElements[] lists;
+    private static final int PLAYER_LIST = 0;
+    private static final int USER_LIST = 1;
+    private static final int TEAM_LIST = 2;
+    private static final int TOURNAMENT_LIST = 3;
+
+    private final ListOfElements[] lists;
     private User currentUser;
     private final Creator creator;
     private final Deleter deleter;
@@ -68,6 +70,7 @@ public class SportManagementSystem {
         final int PASSWORD = 1;
 
         Error error = Error.NULL;
+        int IDENTIFIER = 0;
         int index = this.lists[USER_LIST].getIndexOfElement(arguments[IDENTIFIER]);
         if(this.lists[USER_LIST].elementExists(index)){
             User user = (User) this.lists[USER_LIST].getElement(index);

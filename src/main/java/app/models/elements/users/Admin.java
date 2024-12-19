@@ -2,7 +2,9 @@ package app.models.elements.users;
 
 import app.types.UserType;
 
-public class Admin implements User{
+import java.io.Serializable;
+
+public class Admin implements User, Serializable {
     private final UserType userType;
     private final String userName;
     private final String password;

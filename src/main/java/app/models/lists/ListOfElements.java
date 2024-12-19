@@ -1,12 +1,13 @@
 package app.models.lists;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 import app.models.elements.Element;
 import app.types.Error;
 
-public abstract class ListOfElements {
+public abstract class ListOfElements implements Serializable {
     private final LinkedList<Element> list;
 
     public ListOfElements(){

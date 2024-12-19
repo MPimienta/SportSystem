@@ -19,6 +19,7 @@ public enum Error {
     INCORRECT_PASSWORD,
     UNKNOWN_CATEGORY,
     NOT_PLAYER,
+    OPENING_FILE_ERROR,
     NULL;
 
     public boolean isNull() {

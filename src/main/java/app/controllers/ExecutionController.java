@@ -146,4 +146,12 @@ public class ExecutionController extends Controller {
     public Error logout(){
         return this.publicController.logout();
     }
+
+    public Error saveSession(){
+        return this.publicController.saveSession();
+    }
+
+    public Error recoverSession(){
+        return this.publicController.recoverSession();
+    }
 }

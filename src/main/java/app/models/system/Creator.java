@@ -8,7 +8,9 @@ import app.models.elements.Tournament;
 import app.types.Error;
 import app.models.elements.users.User;
 
-public class Creator {
+import java.io.Serializable;
+
+public class Creator implements Serializable {
     private static final int PLAYER_LIST = 0;
     private static final int USER_LIST = 1;
     private static final int TEAM_LIST = 2;

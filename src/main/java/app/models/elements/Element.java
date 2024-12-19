@@ -1,6 +1,8 @@
 package app.models.elements;
 
-public interface Element {
+import java.io.Serializable;
+
+public interface Element extends Serializable {
 
     String getIdentifier();
 }

@@ -4,9 +4,7 @@ import app.controllers.ExecutionController;
 import app.models.system.SportManagementSystem;
 import app.types.Error;
 import app.types.commands.admin.*;
-import app.types.commands.common.Login;
-import app.types.commands.common.Logout;
-import app.types.commands.common.TournamentListCommand;
+import app.types.commands.common.*;
 import app.types.commands.player.StatisticsShow;
 import app.types.commands.player.TournamentAdd;
 import app.types.commands.player.TournamentRemove;
@@ -36,6 +34,8 @@ public class CommandManager {
         this.commands.put("tournament_add",new TournamentAdd(executionController));
         this.commands.put("tournament_remove",new TournamentRemove(executionController));
         this.commands.put("tournament_list", new TournamentListCommand(executionController));
+        this.commands.put("save",new SaveSession(executionController));
+        this.commands.put("recover", new RecoverSession(executionController));
     }
 
     public Command getCommand(String input) {

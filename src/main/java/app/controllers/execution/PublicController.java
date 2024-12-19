@@ -1,5 +1,6 @@
 package app.controllers.execution;
 
+import app.models.system.FileHandler;
 import app.models.system.SportManagementSystem;
 import app.types.Error;
 import app.types.UserType;
@@ -43,5 +44,13 @@ public class PublicController {
         }
 
         return error;
+    }
+
+    public Error saveSession(){
+        return new FileHandler().saveSession(sportManagementSystem);
+    }
+
+    public Error recoverSession(){
+        return new FileHandler().recoverSession(sportManagementSystem);
     }
 }

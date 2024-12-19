@@ -2,7 +2,9 @@ package app.models.elements.users;
 
 import app.types.UserType;
 
-public class CommonUser implements User{
+import java.io.Serializable;
+
+public class CommonUser implements User, Serializable {
     private final UserType userType;
 
     public CommonUser(){

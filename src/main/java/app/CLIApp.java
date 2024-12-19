@@ -18,7 +18,7 @@ public class CLIApp {
     }
 
     private void play() {
-        this.view.test();
+        //this.view.test();
         do {
             this.view.read();
         } while (true);

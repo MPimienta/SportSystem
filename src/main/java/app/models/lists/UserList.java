@@ -1,6 +1,8 @@
 package app.models.lists;
 
-public class UserList extends ListOfElements{
+import java.io.Serializable;
+
+public class UserList extends ListOfElements implements Serializable {
 
 
 }

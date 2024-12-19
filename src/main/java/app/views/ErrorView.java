@@ -20,7 +20,8 @@ public abstract class ErrorView {
             "\tUnknown specified format",
             "\tIncorrect password",
             "\tUnknown category",
-            "\tYou do not possess player privileges"
+            "\tYou do not possess player privileges",
+            "\tError opening the file"
     };
 
     public abstract void writeln(Error error);
