@@ -82,7 +82,7 @@ public abstract class ListOfElements implements Serializable {
         }
     }
 
-    protected LinkedList<Element> getList(){
+    public LinkedList<Element> getList(){
         return this.list;
     }
 

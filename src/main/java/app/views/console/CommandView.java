@@ -129,10 +129,7 @@ public class CommandView {
         this.test(input);
         input = new String[]{"login", "sudo;sudopassword"};
         this.test(input);
-        input = new String[]{"tournament_list"};
-        this.test(input);
-        input = new String[]{"tournament_list"};
-        this.test(input);
+
 
 
 

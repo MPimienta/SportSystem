@@ -149,5 +149,9 @@ public class SportManagementSystem implements Serializable {
         tournamentsList.deletePastTournaments();
     }
 
+    public ListOfElements[] getLists(){
+        return this.lists;
+    }
+
 
 }
